@@ -31,7 +31,7 @@
       padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         "Noto Sans JP", sans-serif;
-      font-size: 15px;
+      font-size: 16px;
       color: var(--ink);
       background: #f3f4f6;
       line-height: 1.7;
@@ -141,13 +141,15 @@
       display: flex;
       align-items: center;
       gap: 20px;
-      font-size: 13px;
+      font-size: 14px;
       color: #111827;
     }
 
     nav a {
       position: relative;
       padding-bottom: 2px;
+      cursor: pointer;
+      transition: color var(--transition-fast);
     }
 
     nav a::after {
@@ -159,6 +161,10 @@
       height: 2px;
       background: linear-gradient(90deg, #a3e635, #22c55e);
       transition: var(--transition-fast);
+    }
+
+    nav a:hover {
+      color: #16a34a;
     }
 
     nav a:hover::after {
@@ -188,6 +194,7 @@
     .nav-cta:hover {
       transform: translateY(-1px);
       box-shadow: 0 16px 40px rgba(15, 23, 42, 0.6);
+      background: #111827;
     }
 
     .nav-toggle {
@@ -227,7 +234,7 @@
       max-width: 1120px;
       margin: 0 auto;
       padding: 8px 20px 12px;
-      font-size: 13px;
+      font-size: 14px;
       color: #111827;
     }
 
@@ -235,6 +242,7 @@
       display: block;
       padding: 7px 0;
       border-bottom: 1px dashed rgba(209, 213, 219, 0.9);
+      cursor: pointer;
     }
 
     .nav-mobile-inner a:last-child {
@@ -281,9 +289,9 @@
     }
 
     .hero-title {
-      font-size: 34px;
+      font-size: 36px;
       line-height: 1.35;
-      margin: 0 0 12px;
+      margin: 0 0 14px;
     }
 
     .hero-title span.highlight {
@@ -293,10 +301,10 @@
     }
 
     .hero-lead {
-      font-size: 15px;
-      color: #4b5563;
+      font-size: 16px;
+      color: #374151;
       margin: 0 0 18px;
-      max-width: 460px;
+      max-width: 480px;
     }
 
     .hero-tags {
@@ -309,8 +317,7 @@
     .tag {
       padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      font-size: 11px;
+      font-size: 12px;
       color: #111827;
       background: rgba(255, 255, 255, 0.9);
     }
@@ -319,6 +326,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      margin-bottom: 8px;
     }
 
     .btn-primary {
@@ -328,7 +336,7 @@
       cursor: pointer;
       background: #050816;
       color: #f9fafb;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 500;
       display: inline-flex;
       align-items: center;
@@ -338,13 +346,14 @@
     }
 
     .btn-primary span.icon {
-      font-size: 14px;
+      font-size: 16px;
       transform: translateY(1px);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: 0 24px 60px rgba(15, 23, 42, 0.6);
+      background: #111827;
     }
 
     .btn-ghost {
@@ -353,7 +362,7 @@
       border: 1px solid rgba(148, 163, 184, 0.7);
       background: transparent;
       color: #111827;
-      font-size: 13px;
+      font-size: 14px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -363,15 +372,16 @@
 
     .btn-ghost:hover {
       background: rgba(255, 255, 255, 0.95);
+      border-color: #9ca3af;
     }
 
     .hero-note {
-      margin-top: 10px;
-      font-size: 12px;
+      margin-top: 6px;
+      font-size: 13px;
       color: #6b7280;
     }
 
-    /* Hero - right panel（これは“カード”というよりデータビジュアル扱いで残します） */
+    /* Hero - right panel */
 
     .hero-panel {
       border-radius: 28px;
@@ -419,24 +429,25 @@
       border-radius: 16px;
       padding: 10px 11px;
       background: rgba(15, 23, 42, 0.94);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 12px;
+      font-size: 13px;
     }
 
     .hero-metric-label {
       color: #9ca3af;
       margin-bottom: 4px;
+      font-size: 12px;
     }
 
     .hero-metric-value {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 700;
       color: #f9fafb;
+      margin-bottom: 2px;
     }
 
     .hero-metric-foot {
-      margin-top: 3px;
-      font-size: 11px;
+      margin-top: 2px;
+      font-size: 12px;
       color: #9ca3af;
     }
 
@@ -449,12 +460,12 @@
     .badge {
       padding: 3px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
       font-size: 11px;
       display: inline-flex;
       align-items: center;
       gap: 4px;
       margin-top: 4px;
+      background: rgba(15, 23, 42, 0.8);
     }
 
     .badge-dot {
@@ -493,7 +504,7 @@
     /* Sections 共通 */
 
     section.section {
-      padding: 52px 20px;
+      padding: 56px 20px;
       background: #ffffff;
     }
 
@@ -516,7 +527,7 @@
     }
 
     .section-title {
-      font-size: 24px;
+      font-size: 26px;
       margin: 0 0 6px;
     }
 
@@ -553,7 +564,7 @@
     }
 
     .about-heading {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 600;
       margin-bottom: 6px;
     }
@@ -567,16 +578,15 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .pill {
-      padding: 3px 9px;
+      padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      font-size: 11px;
-      color: #4b5563;
-      background: #f9fafb;
+      font-size: 12px;
+      color: #374151;
+      background: #eef2ff;
     }
 
     /* Focus */
@@ -612,10 +622,10 @@
     .focus-tag {
       padding: 4px 9px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      font-size: 11px;
-      color: #4b5563;
+      font-size: 12px;
+      color: #374151;
       background: #ffffff;
+      border: 1px solid rgba(209, 213, 219, 0.9);
     }
 
     .timeline {
@@ -652,7 +662,7 @@
       color: #6b7280;
     }
 
-    /* Project 01 概要（枠ではなく、セクション全体を使う） */
+    /* Project 01 概要 */
 
     .initiative-wrap {
       max-width: 1120px;
@@ -697,11 +707,10 @@
     }
 
     .chip {
-      padding: 3px 8px;
+      padding: 4px 9px;
       border-radius: 999px;
       background: var(--accent-soft);
-      border: 1px solid rgba(190, 242, 100, 0.8);
-      font-size: 11px;
+      font-size: 12px;
       color: #3f6212;
     }
 
@@ -717,12 +726,17 @@
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.8);
       background: #ffffff;
-      font-size: 13px;
+      font-size: 14px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       cursor: pointer;
       transition: var(--transition-med);
+      color: #111827;
+    }
+
+    .btn-outline span {
+      font-size: 15px;
     }
 
     .btn-outline:hover {
@@ -806,6 +820,13 @@
       font-family: ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       font-size: 13px;
       margin-top: 6px;
+      cursor: pointer;
+      color: #16a34a;
+    }
+
+    .contact-email:hover {
+      background: #ecfdf3;
+      border-color: #16a34a;
     }
 
     .contact-note {
@@ -905,7 +926,7 @@
         padding-top: 46px;
       }
       .hero-title {
-        font-size: 28px;
+        font-size: 30px;
       }
       section.section {
         padding: 44px 20px;
@@ -937,10 +958,10 @@
         </div>
       </div>
       <nav>
-        <a href="#about">Mission</a>
-        <a href="#focus">Focus</a>
-        <a href="#initiative">Project</a>
-        <a href="#contact">Contact</a>
+        <a onclick="scrollToId('about')">Mission</a>
+        <a onclick="scrollToId('focus')">Focus</a>
+        <a onclick="scrollToId('initiative')">Project</a>
+        <a onclick="scrollToId('contact')">Contact</a>
         <button class="nav-cta" onclick="scrollToId('contact')">
           協力・連携のご相談
           <span class="icon">↗</span>
@@ -954,11 +975,11 @@
     </div>
     <div class="nav-mobile" id="nav-mobile">
       <div class="nav-mobile-inner">
-        <a href="#about" onclick="closeMobileNav()">Mission</a>
-        <a href="#focus" onclick="closeMobileNav()">Focus</a>
-        <a href="#initiative" onclick="closeMobileNav()">Project</a>
-        <a href="#contact" onclick="closeMobileNav()">Contact</a>
-        <a href="#contact" class="nav-mobile-cta" onclick="closeMobileNav()">
+        <a onclick="scrollToId('about'); closeMobileNav();">Mission</a>
+        <a onclick="scrollToId('focus'); closeMobileNav();">Focus</a>
+        <a onclick="scrollToId('initiative'); closeMobileNav();">Project</a>
+        <a onclick="scrollToId('contact'); closeMobileNav();">Contact</a>
+        <a class="nav-mobile-cta" onclick="scrollToId('contact'); closeMobileNav();">
           協力・連携のご相談
           <span>↗</span>
         </a>
@@ -972,18 +993,16 @@
       <div class="reveal-left">
         <div class="hero-eyebrow">STUDENT-LED HEALTHCARE PROJECT</div>
         <h1 class="hero-title">
-          在宅医療の<span class="highlight">“見えないところ”</span>を、<br />
-          データとAIでつなぎ直す。
+          在宅医療の<span class="highlight">“見えないところ”</span>を、データとAIでつなぎ直す。
         </h1>
         <p class="hero-lead">
-          Care Nexus は、在宅医療・訪問看護の現場とデータ・AIをつなぎ、  
-          「勘と経験」だけに頼らない、持続可能なケアの形を探るチームです。
+          Care Nexus は、在宅医療・訪問看護の現場とデータ・AIをつなぎ、「勘と経験」だけに頼らない、持続可能なケアの形を探るチームです。
         </p>
         <div class="hero-tags">
-          <span class="tag">在宅医療・訪問看護</span>
-          <span class="tag">データ基盤</span>
-          <span class="tag">AI記録支援</span>
-          <span class="tag">学生発プロジェクト</span>
+          <span class="tag">在宅医療</span>
+          <span class="tag">訪問看護</span>
+          <span class="tag">医療 × データ</span>
+          <span class="tag">学生チーム</span>
         </div>
         <div class="hero-actions">
           <button class="btn-primary" onclick="scrollToId('about')">
@@ -1071,16 +1090,14 @@
         <div class="about-label">WHY</div>
         <div class="about-heading">見えないままの在宅の時間</div>
         <p class="about-body">
-          在宅で暮らす高齢者の生活・医療情報は、紙・電話・個別システムに分かれ、  
-          「訪問していない時間」がブラックボックスになりがちです。
+          在宅で暮らす高齢者の生活・医療情報は、紙・電話・個別システムに分かれ、「訪問していない時間」がブラックボックスになりがちです。
         </p>
       </div>
       <div class="about-block reveal">
         <div class="about-label">WHAT</div>
         <div class="about-heading">データとAIで下支えする</div>
         <p class="about-body">
-          情報を一か所に集約し、AI が記録や整理の「下ごしらえ」を担うことで、  
-          人はケアや対話に集中できる状態を目指します。
+          情報を一か所に集約し、AI が記録や整理の「下ごしらえ」を担うことで、人はケアや対話に集中できる状態を目指します。
         </p>
       </div>
       <div class="about-block reveal">
@@ -1090,9 +1107,10 @@
           慶應義塾大学看護医療学部の学生を中心に、現場の専門職や企業・研究者の方に助言をいただきながら進めているプロジェクトです。
         </p>
         <div class="pill-row">
-          <span class="pill">在宅医療・訪問看護</span>
-          <span class="pill">医療 × データ / AI</span>
-          <span class="pill">学生発プロジェクト</span>
+          <span class="pill">在宅医療</span>
+          <span class="pill">訪問看護</span>
+          <span class="pill">医療 × データ</span>
+          <span class="pill">学生チーム</span>
         </div>
       </div>
     </div>
@@ -1162,11 +1180,11 @@
           <div class="initiative-label">OUTLINE</div>
           <h3 class="initiative-title">在宅患者情報の「面」での把握と、記録・算定の下支え</h3>
           <p class="initiative-lead">
-            既存のバイタルデバイスや記録システムと連携し、在宅患者さんの情報を「点」ではなく「面」としてとらえられるようにする。  
+            既存のバイタルデバイスや記録システムと連携し、在宅患者さんの情報を「点」ではなく「面」としてとらえられるようにします。
             そのうえで、AI が記録や算定の下ごしらえを支援し、看護師がケアに集中できる状態を目指します。
           </p>
           <div class="chip-row">
-            <span class="chip">在宅患者情報の集約</span>
+            <span class="chip">バイタル・記録情報の集約</span>
             <span class="chip">AIによる記録案生成</span>
             <span class="chip">加算算定のチェック支援</span>
           </div>
@@ -1223,7 +1241,7 @@
           <li>医療・ヘルスケア領域での IT / データ活用に関心のある企業・エンジニアの方</li>
         </ul>
         <p style="font-size:14px;margin-top:10px;color:#6b7280;">
-          「まだアイデア段階だけど」「少しだけ意見を伝えたい」くらいの温度感でも構いません。  
+          「まだアイデア段階だけど」「少しだけ意見を伝えたい」くらいの温度感でも構いません。
           一度オンラインでお話させていただけると嬉しいです。
         </p>
       </div>
@@ -1232,10 +1250,10 @@
         <p style="font-size:14px;margin:4px 0;">
           下記メールアドレス宛に、「Care Nexus について」と件名を添えてご連絡ください。
         </p>
-        <div class="contact-email">
+        <a class="contact-email" href="mailto:example@keio.jp">
           <span>✉</span>
           <span>example@keio.jp</span>
-        </div>
+        </a>
         <p class="contact-note">
           ※ 実際に使用する代表メールアドレスに差し替えてください。必要に応じて、お問い合わせフォームや SNS へのリンクも追加可能です。
         </p>
