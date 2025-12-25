@@ -385,7 +385,7 @@
 
     .hero-panel {
       border-radius: 28px;
-      padding: 20px 20px 18px;
+      padding: 22px 22px 20px;
       background:
         radial-gradient(circle at 0% 0%, rgba(74, 222, 128, 0.32), transparent 55%),
         linear-gradient(135deg, #020617, #020617 35%, #020617 100%);
@@ -393,7 +393,7 @@
       position: relative;
       overflow: hidden;
       color: #e5e7eb;
-      font-size: 14px;
+      font-size: 15px;
     }
 
     .hero-panel-header {
@@ -401,7 +401,7 @@
       align-items: center;
       justify-content: space-between;
       font-size: 14px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .hero-tag-main {
@@ -422,13 +422,13 @@
     .hero-panel-main {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 10px;
-      margin-bottom: 10px;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
     .hero-metric {
       border-radius: 16px;
-      padding: 11px 12px;
+      padding: 12px 13px;
       background: rgba(15, 23, 42, 0.94);
     }
 
@@ -442,13 +442,14 @@
       font-size: 19px;
       font-weight: 700;
       color: #f9fafb;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .hero-metric-foot {
-      margin-top: 2px;
-      font-size: 13px;
-      color: #9ca3af;
+      margin-top: 0;
+      font-size: 14px;
+      color: #cbd5f5;
+      line-height: 1.6;
     }
 
     .hero-metric-subgrid {
@@ -457,32 +458,14 @@
       gap: 8px;
     }
 
-    .badge {
-      padding: 4px 9px;
-      border-radius: 999px;
-      font-size: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 4px;
-      background: rgba(15, 23, 42, 0.8);
-    }
-
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #4ade80;
-    }
-
     .hero-panel-foot {
       border-top: 1px dashed rgba(148, 163, 184, 0.6);
-      padding-top: 8px;
-      font-size: 12px;
-      color: #9ca3af;
+      padding-top: 10px;
+      font-size: 13px;
+      color: #d1d5db;
       display: flex;
-      justify-content: space-between;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 6px 12px;
     }
 
     .orbital {
@@ -931,6 +914,10 @@
       section.section {
         padding: 48px 20px;
       }
+      .hero-panel-foot {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
     @media (min-width: 721px) {
@@ -1024,35 +1011,36 @@
           <div class="hero-tag-main">CARE NEXUS SNAPSHOT</div>
           <div class="hero-tag-pill">Early Stage</div>
         </div>
+
         <div class="hero-panel-main">
+          <!-- 左側：今向き合っているテーマ -->
           <div class="hero-metric">
-            <div class="hero-metric-label">今、特に向き合っている問い</div>
+            <div class="hero-metric-label">今、特に向き合っているテーマ</div>
             <div class="hero-metric-value">在宅 × 情報の断片化</div>
             <div class="hero-metric-foot">
-              「訪問していない時間」のブラックボックスをどう埋めるか。
+              訪問していない時間に何が起きているのか。<br />
+              そのブラックボックスを、どうやって見える化するか。
             </div>
           </div>
+
+          <!-- 右側：フィールド & 技術の使い方 -->
           <div class="hero-metric-subgrid">
             <div class="hero-metric">
               <div class="hero-metric-label">フィールド</div>
               <div class="hero-metric-foot">
-                在宅医療<br />訪問看護<br />地域包括ケア
+                在宅医療 / 訪問看護 / 地域包括ケア
               </div>
             </div>
             <div class="hero-metric">
               <div class="hero-metric-label">技術の使い方</div>
               <div class="hero-metric-foot">
-                <div class="badge">
-                  <span class="badge-dot"></span> 記録の下ごしらえを AI に
-                </div>
-                <div class="badge" style="margin-top:4px;">
-                  <span class="badge-dot" style="background:#a855f7;"></span>
-                  データを現場の言葉に戻す
-                </div>
+                ・記録や情報整理の「下ごしらえ」を AI に任せる<br />
+                ・データを、現場の言葉と判断に戻すところまで設計する
               </div>
             </div>
           </div>
         </div>
+
         <div class="hero-panel-foot">
           <span>最初の一歩は「在宅高齢者 × 訪問看護ステーション」。</span>
           <span>その先に、地域全体の情報基盤を見据えています。</span>
