@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Care Nexus | データとAIで、医療をもっと持続可能に。</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Care Nexus は、データとAIを活用して医療・ケアをより持続可能な仕組みに変えていくことを目指すチームです。第一歩として在宅高齢者と訪問看護ステーションをつなぐ情報プラットフォームに取り組んでいます。"
+  />
+  <style>
+    :root {
+      --accent: #9ad956;      /* 黄緑（ロゴに近い想定） */
+      --accent-soft: #e9f7d7;
+      --bg: #ffffff;
+      --bg-alt: #f7f8fb;
+      --text: #222222;
+      --text-muted: #666666;
+      --border: #e0e3ea;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.06);
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+      --transition-fast: 0.18s ease-out;
+      --nav-height: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans JP", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout */
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section {
+      padding: 72px 24px;
+    }
+
+    .section-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .section-label::before {
+      content: "";
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-size: 24px;
+      margin: 8px 0 4px;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* Top Nav */
+
+    .nav {
+      height: var(--nav-height);
+      padding: 0 24px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .nav-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 20% 20%, #cfff8b, var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0f1b08;
+      font-weight: 800;
+      font-size: 16px;
+      box-shadow: 0 10px 25px rgba(154, 217, 86, 0.4);
+    }
+
+    /* ロゴ画像を差し替える場合は、この .logo-mark を img で置き換えてOK */
+
+    .logo-text-main {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .logo-text-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--accent);
+      transition: width var(--transition-fast);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #071103;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 26px rgba(154, 217, 86, 0.5);
+      transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast);
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-cta span.icon {
+      font-size: 14px;
+      transform: translateY(1px);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(154, 217, 86, 0.6);
+      background: #a6e366;
+    }
+
+    /* Mobile nav toggle */
+
+    .nav-toggle {
+      display: none;
+      border: none;
+      background: transparent;
+      padding: 4px;
+      cursor: pointer;
+    }
+
+    .nav-toggle-bar {
+      width: 20px;
+      height: 2px;
+      border-radius: 999px;
+      background: #222;
+      margin: 3px 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-mobile-open .nav-toggle-bar:nth-child(1) {
+      transform: translateY(5px) rotate(45deg);
+    }
+    .nav-mobile-open .nav-toggle-bar:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-mobile-open .nav-toggle-bar:nth-child(3) {
+      transform: translateY(-5px) rotate(-45deg);
+    }
+
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.98);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      padding: 12px 24px 20px;
+    }
+
+    .nav-mobile-menu a {
+      display: block;
+      padding: 8px 0;
+      font-size: 14px;
+      border-bottom: 1px dashed rgba(0, 0, 0, 0.06);
+    }
+
+    .nav-mobile-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .nav-mobile-menu .nav-mobile-cta {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #071103;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 26px rgba(154, 217, 86, 0.5);
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 72px 24px 64px;
+      background: radial-gradient(circle at 0% 0%, #f2ffe3, #ffffff 40%, #f7f8fb);
+    }
+
+    .hero-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(154, 217, 86, 0.14);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #38511f;
+      margin-bottom: 14px;
+    }
+
+    .hero-eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .hero-title {
+      font-size: 32px;
+      line-height: 1.3;
+      margin: 0 0 8px;
+    }
+
+    .hero-title span.highlight {
+      background: linear-gradient(120deg, #cfff8b, #9ad956);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #f0f3f8;
+      color: #5b6578;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .btn-primary {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: #111111;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        background var(--transition-fast);
+    }
+
+    .btn-primary span.icon {
+      font-size: 14px;
+      transform: translateY(1px);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      background: #000000;
+    }
+
+    .btn-ghost {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid #d1d6e0;
+      background: rgba(255, 255, 255, 0.8);
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #4b5565;
+      transition: background var(--transition-fast), border-color var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .btn-ghost span.icon {
+      font-size: 15px;
+    }
+
+    .btn-ghost:hover {
+      background: #f3f4f9;
+      border-color: #cbd2e0;
+    }
+
+    .hero-note {
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-right {
+      position: relative;
+    }
+
+    .hero-card {
+      background: #ffffff;
+      border-radius: var(--radius-xl);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .hero-card-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .hero-card-badge {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #425623;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 10px 0 2px;
+    }
+
+    .metric {
+      background: #f7f8fb;
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 11px;
+    }
+
+    .metric-label {
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .metric-value {
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .metric-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      margin-top: 4px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(154, 217, 86, 0.15);
+      color: #476020;
+    }
+
+    .hero-card-footer {
+      margin-top: 10px;
+      border-top: 1px dashed #e0e3ea;
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-orbit {
+      position: absolute;
+      inset: -24px -30px auto auto;
+      pointer-events: none;
+      opacity: 0.12;
+    }
+
+    /* Sections */
+
+    .section.alt {
+      background: var(--bg-alt);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .card p {
+      margin: 4px 0;
+      font-size: 14px;
+    }
+
+    .card ul {
+      padding-left: 1.1em;
+      margin: 8px 0;
+      font-size: 13px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #f0f3f8;
+      color: #5b6578;
+    }
+
+    /* Contact */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 28px;
+      align-items: flex-start;
+    }
+
+    .contact-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+    }
+
+    .contact-card p {
+      margin: 4px 0;
+    }
+
+    .contact-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .contact-email {
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px dashed #cbd2e0;
+      background: #f9fafb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .contact-email span.icon {
+      font-size: 13px;
+    }
+
+    /* Footer */
+
+    .footer {
+      border-top: 1px solid rgba(0, 0, 0, 0.04);
+      padding: 16px 24px 18px;
+      font-size: 11px;
+      color: var(--text-muted);
+      background: #ffffff;
+    }
+
+    .footer-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 860px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-right {
+        order: -1;
+      }
+      .two-column,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+      .nav-cta {
+        display: none;
+      }
+      .nav-toggle {
+        display: inline-flex;
+        flex-direction: column;
+      }
+      .hero {
+        padding-top: 52px;
+      }
+      .section {
+        padding: 56px 20px;
+      }
+      .hero-title {
+        font-size: 26px;
+      }
+      .hero-subtitle {
+        font-size: 14px;
+      }
+    }
+
+    @media (min-width: 721px) {
+      .nav-mobile-menu {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <!-- NAV -->
+  <header class="nav" id="top">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <div class="logo-mark">CN</div>
+        <div>
+          <div class="logo-text-main">Care Nexus</div>
+          <div class="logo-text-sub">Data &amp; AI for sustainable care</div>
+        </div>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#about">About</a>
+          <a href="#vision">Vision &amp; Mission</a>
+          <a href="#project1">Project #1</a>
+          <a href="#roadmap">今後の展望</a>
+        </nav>
+        <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          お問い合わせ
+          <span class="icon">↗</span>
+        </button>
+        <button class="nav-toggle" aria-label="メニューを開く" onclick="toggleMobileNav()">
+          <div class="nav-toggle-bar"></div>
+          <div class="nav-toggle-bar"></div>
+          <div class="nav-toggle-bar"></div>
+        </button>
+      </div>
+    </div>
+    <div class="nav-mobile-menu" id="nav-mobile-menu">
+      <a href="#about" onclick="toggleMobileNav(false)">About</a>
+      <a href="#vision" onclick="toggleMobileNav(false)">Vision &amp; Mission</a>
+      <a href="#project1" onclick="toggleMobileNav(false)">Project #1</a>
+      <a href="#roadmap" onclick="toggleMobileNav(false)">今後の展望</a>
+      <a href="#contact" class="nav-mobile-cta" onclick="toggleMobileNav(false)">
+        <span>お問い合わせ</span>
+        <span class="icon">↗</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-right">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <div class="hero-card-title">在宅ケア情報ダッシュボード（イメージ）</div>
+            <div class="hero-card-badge">AI &amp; DATA</div>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric">
+              <div class="metric-label">在宅患者</div>
+              <div class="metric-value">42名</div>
+              <div class="metric-pill">記録自動生成中</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">本日の訪問件数</div>
+              <div class="metric-value">18件</div>
+              <div class="metric-pill">記録工数 △48%</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">AIが要注意と判断</div>
+              <div class="metric-value">3名</div>
+              <div class="metric-pill">早期介入を提案</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">加算算定の抜け漏れ</div>
+              <div class="metric-value">0件</div>
+              <div class="metric-pill">AIがチェック済み</div>
+            </div>
+          </div>
+          <div class="hero-card-footer">
+            <span>Care Nexus / 在宅ケア情報インフラ・コンセプト</span>
+            <span>リアルプロダクトは現在設計中</span>
+          </div>
+        </div>
+        <svg class="hero-orbit" viewBox="0 0 240 160">
+          <defs>
+            <linearGradient id="orb" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#9ad956" />
+              <stop offset="100%" stop-color="#5fb62a" />
+            </linearGradient>
+          </defs>
+          <circle cx="60" cy="80" r="46" fill="none" stroke="url(#orb)" stroke-width="1.5" />
+          <circle cx="160" cy="70" r="32" fill="none" stroke="url(#orb)" stroke-width="1.2" />
+          <circle cx="60" cy="80" r="3" fill="#9ad956" />
+          <circle cx="160" cy="70" r="2.4" fill="#9ad956" />
+          <circle cx="200" cy="40" r="2" fill="#cfff8b" />
+        </svg>
+      </div>
+      <div>
+        <div class="hero-eyebrow">
+          <div class="hero-eyebrow-dot"></div>
+          CARE NEXUS / PROJECT #1
+        </div>
+        <h1 class="hero-title">
+          データとAIで、<span class="highlight">在宅ケア</span>を<br />
+          もっと持続可能に。
+        </h1>
+        <p class="hero-subtitle">
+          Care Nexus は、データとAIを活用して医療・ケアの現場を支える新しい基盤づくりに挑戦するチームです。第一歩として、
+          在宅高齢者と訪問看護ステーションをつなぐ情報プラットフォームの開発に取り組んでいます。
+        </p>
+        <div class="hero-tags">
+          <span class="hero-tag">在宅医療・訪問看護</span>
+          <span class="hero-tag">AI 記録支援</span>
+          <span class="hero-tag">診療報酬算定サポート</span>
+          <span class="hero-tag">医療 × データインフラ</span>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="document.getElementById('project1').scrollIntoView({behavior:'smooth'})">
+            プロジェクト概要を見る
+            <span class="icon">↓</span>
+          </button>
+          <button class="btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            協力・連携のご相談
+            <span class="icon">↗</span>
+          </button>
+        </div>
+        <div class="hero-note">
+          ※ 本ページは学生チーム Care Nexus のプロジェクト紹介ページです。法人化は検討中です。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">About</div>
+        <h2 class="section-title">Care Nexus について</h2>
+        <p class="section-subtitle">
+          「データとAIの力で、医療・ケアをより持続可能な仕組みに変えていく」ことを目指すプロジェクトチームです。
+        </p>
+      </div>
+      <div class="two-column">
+        <div class="card">
+          <h3>私たちが向き合う構造的な課題</h3>
+          <p>
+            日本では高齢化が進み、在宅で暮らす高齢者が増えています。その生活・医療情報は紙の記録や電話・FAX、個別システムに分断され、
+            「訪問の瞬間ごとの断片」として扱われているのが現状です。
+          </p>
+          <p>
+            一方、訪問看護ステーションでは、詳細な記録作成や診療報酬算定などの間接業務が看護師の時間を圧迫し、本来価値を生む訪問ケアに十分な時間を割けないという構造的な非効率が続いています。
+          </p>
+          <p>
+            在宅高齢者を支える情報と業務の仕組みが断片的で非効率なために、利用者の安心と訪問看護ステーションの持続可能性がともに脅かされている――これが、Care
+            Nexus が向き合う社会課題です。
+          </p>
+        </div>
+        <div class="card">
+          <h3>Care Nexus というチーム</h3>
+          <p>
+            Care Nexus は、慶應義塾大学看護医療学部の学生を中心としたチームです。看護学の知見と、テクノロジー・ビジネスの視点を掛け合わせながら、
+            現場の専門家と対話しつつプロジェクトを進めています。
+          </p>
+          <p>
+            特定の一つのプロダクトだけを運営する組織ではなく、医療・看護の現場に眠るデータと新しいテクノロジーをつなぎなおし、経験や根性に依存してきた業務プロセスを、
+            持続可能で再現性のある仕組みに変えていくことを目指しています。
+          </p>
+          <div class="pill-row">
+            <span class="pill">学生発プロジェクト</span>
+            <span class="pill">医療・看護 × データ</span>
+            <span class="pill">在宅医療・地域医療</span>
+            <span class="pill">社会起業</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION & MISSION -->
+  <section class="section alt" id="vision">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">Vision &amp; Mission</div>
+        <h2 class="section-title">Care Nexus のめざす方向性</h2>
+      </div>
+      <div class="two-column">
+        <div class="card">
+          <h3>Vision</h3>
+          <p>
+            データとAIを活用して、医療・ケアの現場が「勘と経験」だけに頼らず、安心と持続可能性を両立できる社会インフラをつくる。
+          </p>
+          <p>
+            個別のツールを増やすのではなく、医療・ケアを支える情報の流れそのものをデザインし直すことで、現場と受け手の双方にとって「続けられる医療・ケア」の実現を目指します。
+          </p>
+        </div>
+        <div class="card">
+          <h3>Mission</h3>
+          <p>
+            データとAIを活用して、医療・ケアの現場で働く人と受け手の両方が、限られた資源のなかでも、安心と質をあきらめなくてよい仕組みをつくる。
+          </p>
+          <p>
+            Care Nexus は、個々のプロダクト開発をゴールとするのではなく、「医療・ケアを支えるデータ基盤そのものをどう育てていくか」という視点から、現場と共創しながら実装を進めていきます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT #1 -->
+  <section class="section" id="project1">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">Project #1</div>
+        <h2 class="section-title">在宅高齢者 × 訪問看護向け 情報プラットフォーム</h2>
+        <p class="section-subtitle">
+          在宅で暮らす高齢者の情報をシームレスに集約し、訪問看護師が本来のケアに集中できるようにすることが、最初のフォーカスです。
+        </p>
+      </div>
+      <div class="two-column">
+        <div class="card">
+          <h3>課題に対するアプローチ</h3>
+          <ul>
+            <li>既存のバイタルデバイスや訪問看護記録システムと連携し、在宅患者の情報をクラウド上で一元管理</li>
+            <li>「訪問の瞬間ごとの断片」だった情報を、連続したデータとして把握できる環境を整備</li>
+            <li>訪問看護師の記録・算定業務をAIが自動アシストし、事務負担を大きく削減</li>
+          </ul>
+          <p>
+            本ソリューションは、既存プロダクトの「点」をつなぎ合わせ、訪問看護ステーションの中で使える「面」としての情報基盤をつくることを狙いとしています。
+          </p>
+        </div>
+        <div class="card">
+          <h3>提供価値（想定）</h3>
+          <p>
+            ● 看護師にとって：記録・SOAP作成・診療報酬算定補助などをAIが担い、事務ではなく本来のケアに時間を使えるようにする。<br />
+            ● ステーションにとって：加算算定の抜け漏れ防止と業務可視化により、生産性向上と財務の安定に寄与する。
+          </p>
+          <p>
+            初期フェーズでは、数拠点の訪問看護ステーションと協力しながら、実際の業務フローの中でどの程度負担軽減・算定改善が見込めるかを検証していく予定です。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP / FUTURE -->
+  <section class="section alt" id="roadmap">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">Future</div>
+        <h2 class="section-title">今後の展望</h2>
+      </div>
+      <div class="card">
+        <p>
+          在宅高齢者と訪問看護のプロジェクトは、Care Nexus の最初の一歩に過ぎません。今後は、在宅医療や地域包括ケア、慢性疾患マネジメント、退院後支援など、
+          医療・ケアの連続性が重要な領域に対しても、データとAIを活用したプロダクト・サービスを展開していく構想です。
+        </p>
+        <p>
+          個々のアプリケーションを単発で作るのではなく、「医療・ケアのデータ基盤をどう育てるか」という視点から、長期的に取り組んでいきます。プロジェクトごとに
+          <strong>Project #2, #3...</strong> と拡張しつつも、共通の哲学と技術基盤を持つ「Care Nexus
+          プラットフォーム」として育てていくことを目指しています。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">協力・連携のご相談</h2>
+        <p class="section-subtitle">
+          実証フィールドとしてのご協力や、専門的なアドバイス、技術連携のご相談などを歓迎しています。
+        </p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <p>
+            ● プロトタイプの検証に協力してくださる訪問看護ステーションの方<br />
+            ● 在宅医療・訪問看護・地域包括ケアの専門家の方<br />
+            ● 医療・介護向けIoTデバイスやシステムをお持ちの企業の方
+          </p>
+          <p>との対話を歓迎しています。</p>
+          <p class="contact-note">
+            現在は学生チームとしての活動段階のため、まずは情報交換・意見交換ベースでのお打ち合わせからスタートできればと考えています。
+          </p>
+        </div>
+        <div>
+          <div class="contact-card">
+            <p>ご連絡は、以下のメールアドレス宛にお願いいたします。</p>
+            <div class="contact-email">
+              <span class="icon">✉</span>
+              <span>example@keio.jp</span>
+            </div>
+            <p class="contact-note">
+              ※ 実際に利用する代表メールアドレスに差し替えてください。必要に応じてフォームやSNSリンクも追加可能です。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>© <span id="year"></span> Care Nexus. All rights reserved.</div>
+      <div class="footer-links">
+        <span>Student project / 慶應義塾大学看護医療学部 有志チーム</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // 年の自動更新
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // モバイルナビ開閉
+  function toggleMobileNav(forceClose) {
+    const body = document.body;
+    const menu = document.getElementById("nav-mobile-menu");
+    const isOpen = body.classList.contains("nav-mobile-open");
+
+    if (forceClose === false || isOpen) {
+      body.classList.remove("nav-mobile-open");
+      menu.style.display = "none";
+    } else {
+      body.classList.add("nav-mobile-open");
+      menu.style.display = "block";
+    }
+  }
+
+  // スクロール時にモバイルメニューが開いていたら閉じる
+  window.addEventListener("scroll", function () {
+    if (document.body.classList.contains("nav-mobile-open")) {
+      toggleMobileNav(false);
+    }
+  });
+</script>
+</body>
+</html>
