@@ -2,26 +2,22 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>Care Nexus | データとAIで、医療をもっと持続可能に。</title>
+  <title>Care Nexus | 医療とデータの接点をつくる</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Care Nexus は、データとAIを活用して医療・ケアをより持続可能な仕組みに変えていくことを目指すチームです。第一歩として在宅高齢者と訪問看護ステーションをつなぐ情報プラットフォームに取り組んでいます。"
+    content="Care Nexus は、医療・看護の現場とデータ・AIをつなぎ、持続可能な医療のあり方を探る学生チームです。"
   />
   <style>
     :root {
-      --accent: #9ad956;      /* 黄緑（ロゴに近い想定） */
-      --accent-soft: #e9f7d7;
+      --accent: #9ad956;  /* 黄緑：ロゴに寄せる */
+      --accent-soft: #f3f9e7;
       --bg: #ffffff;
-      --bg-alt: #f7f8fb;
-      --text: #222222;
+      --bg-alt: #f7f8fa;
+      --text: #111111;
       --text-muted: #666666;
       --border: #e0e3ea;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.06);
-      --radius-lg: 18px;
-      --radius-xl: 26px;
-      --transition-fast: 0.18s ease-out;
-      --nav-height: 72px;
+      --radius: 12px;
     }
 
     * {
@@ -35,10 +31,6 @@
         "Noto Sans JP", sans-serif;
       color: var(--text);
       background: var(--bg);
-      scroll-behavior: smooth;
-    }
-
-    body {
       line-height: 1.7;
     }
 
@@ -52,366 +44,132 @@
       display: block;
     }
 
-    /* Layout */
-
-    .page {
+    .wrapper {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    .section {
-      padding: 72px 24px;
-    }
-
-    .section-inner {
-      max-width: 1040px;
+    .inner {
+      max-width: 960px;
       margin: 0 auto;
+      padding: 0 20px;
     }
 
-    .section-header {
-      margin-bottom: 32px;
-    }
+    /* Header */
 
-    .section-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .section-label::before {
-      content: "";
-      width: 18px;
-      height: 2px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .section-title {
-      font-size: 24px;
-      margin: 8px 0 4px;
-    }
-
-    .section-subtitle {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    /* Top Nav */
-
-    .nav {
-      height: var(--nav-height);
-      padding: 0 24px;
+    header {
       border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(6px);
       position: sticky;
       top: 0;
-      z-index: 20;
-      backdrop-filter: blur(12px);
-      background: rgba(255, 255, 255, 0.9);
+      z-index: 10;
     }
 
-    .nav-inner {
-      max-width: 1040px;
-      margin: 0 auto;
-      height: 100%;
+    .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      padding: 10px 20px;
+      max-width: 960px;
+      margin: 0 auto;
     }
 
-    .nav-left {
+    .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .logo-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 12px;
-      background: radial-gradient(circle at 20% 20%, #cfff8b, var(--accent));
+    /* ロゴはあとから画像に置き換え可 */
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      background: var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #0f1b08;
-      font-weight: 800;
-      font-size: 16px;
-      box-shadow: 0 10px 25px rgba(154, 217, 86, 0.4);
-    }
-
-    /* ロゴ画像を差し替える場合は、この .logo-mark を img で置き換えてOK */
-
-    .logo-text-main {
+      font-size: 14px;
       font-weight: 700;
-      font-size: 18px;
+      color: #0b1404;
     }
 
-    .logo-text-sub {
+    .brand-text-main {
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .brand-text-sub {
       font-size: 11px;
       color: var(--text-muted);
     }
 
-    .nav-right {
+    nav {
       display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 18px;
+      gap: 16px;
       font-size: 14px;
     }
 
-    .nav-links a {
-      position: relative;
-      padding-bottom: 2px;
+    nav a {
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
     }
 
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0%;
-      height: 2px;
-      border-radius: 999px;
-      background: var(--accent);
-      transition: width var(--transition-fast);
+    nav a:hover {
+      border-bottom-color: var(--accent);
     }
 
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-cta {
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: var(--accent);
-      color: #071103;
-      font-size: 13px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 10px 26px rgba(154, 217, 86, 0.5);
-      transition: transform var(--transition-fast),
-        box-shadow var(--transition-fast),
-        background var(--transition-fast);
-      border: none;
-      cursor: pointer;
-    }
-
-    .nav-cta span.icon {
-      font-size: 14px;
-      transform: translateY(1px);
-    }
-
-    .nav-cta:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 32px rgba(154, 217, 86, 0.6);
-      background: #a6e366;
-    }
-
-    /* Mobile nav toggle */
-
-    .nav-toggle {
-      display: none;
-      border: none;
-      background: transparent;
-      padding: 4px;
-      cursor: pointer;
-    }
-
-    .nav-toggle-bar {
-      width: 20px;
-      height: 2px;
-      border-radius: 999px;
-      background: #222;
-      margin: 3px 0;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .nav-mobile-open .nav-toggle-bar:nth-child(1) {
-      transform: translateY(5px) rotate(45deg);
-    }
-    .nav-mobile-open .nav-toggle-bar:nth-child(2) {
-      opacity: 0;
-    }
-    .nav-mobile-open .nav-toggle-bar:nth-child(3) {
-      transform: translateY(-5px) rotate(-45deg);
-    }
-
-    .nav-mobile-menu {
-      display: none;
-      position: fixed;
-      top: var(--nav-height);
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.98);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-      padding: 12px 24px 20px;
-    }
-
-    .nav-mobile-menu a {
-      display: block;
-      padding: 8px 0;
-      font-size: 14px;
-      border-bottom: 1px dashed rgba(0, 0, 0, 0.06);
-    }
-
-    .nav-mobile-menu a:last-child {
-      border-bottom: none;
-    }
-
-    .nav-mobile-menu .nav-mobile-cta {
-      margin-top: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: var(--accent);
-      color: #071103;
-      font-size: 13px;
-      font-weight: 600;
-      box-shadow: 0 10px 26px rgba(154, 217, 86, 0.5);
+    @media (max-width: 700px) {
+      nav {
+        display: none;
+      }
     }
 
     /* Hero */
 
     .hero {
-      padding: 72px 24px 64px;
-      background: radial-gradient(circle at 0% 0%, #f2ffe3, #ffffff 40%, #f7f8fb);
+      padding: 40px 0 32px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.03);
     }
 
-    .hero-inner {
-      max-width: 1040px;
-      margin: 0 auto;
+    .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 40px;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 28px;
       align-items: center;
     }
 
     .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(154, 217, 86, 0.14);
       font-size: 11px;
-      font-weight: 600;
+      color: var(--text-muted);
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #38511f;
-      margin-bottom: 14px;
-    }
-
-    .hero-eyebrow-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
+      margin-bottom: 8px;
     }
 
     .hero-title {
-      font-size: 32px;
-      line-height: 1.3;
+      font-size: 26px;
+      line-height: 1.4;
       margin: 0 0 8px;
     }
 
-    .hero-title span.highlight {
-      background: linear-gradient(120deg, #cfff8b, #9ad956);
-      -webkit-background-clip: text;
-      color: transparent;
+    .hero-title span {
+      background: var(--accent-soft);
+      padding: 0 4px;
+      border-radius: 4px;
     }
 
-    .hero-subtitle {
-      font-size: 15px;
-      color: var(--text-muted);
-      margin-bottom: 18px;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .hero-tag {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: #f0f3f8;
-      color: #5b6578;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-top: 8px;
-    }
-
-    .btn-primary {
-      padding: 10px 18px;
-      border-radius: 999px;
-      background: #111111;
-      color: #ffffff;
-      font-size: 13px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
-        background var(--transition-fast);
-    }
-
-    .btn-primary span.icon {
+    .hero-lead {
       font-size: 14px;
-      transform: translateY(1px);
+      color: var(--text-muted);
+      margin: 0 0 12px;
     }
 
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-      background: #000000;
-    }
-
-    .btn-ghost {
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid #d1d6e0;
-      background: rgba(255, 255, 255, 0.8);
+    .hero-text-sub {
       font-size: 13px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: #4b5565;
-      transition: background var(--transition-fast), border-color var(--transition-fast);
-      cursor: pointer;
-    }
-
-    .btn-ghost span.icon {
-      font-size: 15px;
-    }
-
-    .btn-ghost:hover {
-      background: #f3f4f9;
-      border-color: #cbd2e0;
+      color: var(--text-muted);
     }
 
     .hero-note {
@@ -420,172 +178,173 @@
       color: var(--text-muted);
     }
 
-    .hero-right {
-      position: relative;
-    }
-
-    .hero-card {
-      background: #ffffff;
-      border-radius: var(--radius-xl);
-      padding: 18px 18px 16px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(226, 232, 240, 0.8);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .hero-card-title {
+    .hero-box {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      background: var(--bg-alt);
       font-size: 13px;
-      font-weight: 600;
     }
 
-    .hero-card-badge {
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: #425623;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .hero-metrics {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin: 10px 0 2px;
-    }
-
-    .metric {
-      background: #f7f8fb;
-      border-radius: 12px;
-      padding: 8px 10px;
-      font-size: 11px;
-    }
-
-    .metric-label {
-      color: var(--text-muted);
-      font-size: 11px;
-    }
-
-    .metric-value {
+    .hero-box h2 {
       font-size: 14px;
-      font-weight: 700;
-      margin-top: 2px;
+      margin: 0 0 6px;
     }
 
-    .metric-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 10px;
-      margin-top: 4px;
-      padding: 2px 6px;
-      border-radius: 999px;
-      background: rgba(154, 217, 86, 0.15);
-      color: #476020;
+    .hero-box ul {
+      margin: 6px 0;
+      padding-left: 18px;
+      font-size: 13px;
     }
 
-    .hero-card-footer {
-      margin-top: 10px;
-      border-top: 1px dashed #e0e3ea;
-      padding-top: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--text-muted);
+    .hero-box a {
+      font-size: 13px;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
     }
 
-    .hero-orbit {
-      position: absolute;
-      inset: -24px -30px auto auto;
-      pointer-events: none;
-      opacity: 0.12;
+    @media (max-width: 800px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     /* Sections */
 
-    .section.alt {
+    section {
+      padding: 36px 0;
+    }
+
+    section.alt {
       background: var(--bg-alt);
+    }
+
+    .section-title {
+      font-size: 20px;
+      margin: 0 0 4px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0 0 16px;
     }
 
     .two-column {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 32px;
-      align-items: flex-start;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 800px) {
+      .two-column {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     .card {
-      background: #ffffff;
-      border-radius: var(--radius-lg);
-      padding: 18px 20px;
+      border-radius: var(--radius);
       border: 1px solid var(--border);
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.04);
+      background: #ffffff;
+      padding: 16px 18px;
       font-size: 14px;
     }
 
     .card h3 {
-      margin-top: 0;
-      margin-bottom: 8px;
-      font-size: 16px;
+      font-size: 15px;
+      margin: 0 0 8px;
     }
 
     .card p {
       margin: 4px 0;
-      font-size: 14px;
     }
 
-    .card ul {
-      padding-left: 1.1em;
-      margin: 8px 0;
-      font-size: 13px;
-    }
-
-    .pill-row {
+    .chip-row {
+      margin-top: 10px;
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: 10px;
     }
 
-    .pill {
-      font-size: 11px;
-      padding: 4px 10px;
+    .chip {
+      padding: 2px 8px;
       border-radius: 999px;
-      background: #f0f3f8;
-      color: #5b6578;
+      border: 1px solid #dde2ec;
+      font-size: 11px;
+      color: #4b5563;
+      background: #f9fafb;
+    }
+
+    /* Project list */
+
+    .project-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .project-card {
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+      background: #ffffff;
+      font-size: 14px;
+    }
+
+    .project-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .project-name {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .project-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .project-card a.more {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+      font-size: 13px;
+      color: #1f2933;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     /* Contact */
 
-    .contact-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 28px;
-      align-items: flex-start;
-    }
-
-    .contact-card {
-      background: #ffffff;
-      border-radius: var(--radius-lg);
-      padding: 18px 20px;
+    .contact-box {
+      border-radius: var(--radius);
       border: 1px solid var(--border);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+      background: #ffffff;
+      padding: 16px 18px;
       font-size: 14px;
     }
 
-    .contact-card p {
-      margin: 4px 0;
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px dashed #cbd2e0;
+      background: #f9fafb;
+      font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      margin-top: 4px;
     }
 
     .contact-note {
@@ -594,438 +353,371 @@
       margin-top: 8px;
     }
 
-    .contact-email {
-      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas,
-        "Liberation Mono", "Courier New", monospace;
-      font-size: 13px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px dashed #cbd2e0;
-      background: #f9fafb;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 6px;
+    /* Project detail section */
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
     }
 
-    .contact-email span.icon {
+    .breadcrumb a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .detail-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .detail-title {
+      font-size: 18px;
+      margin: 4px 0 6px;
+    }
+
+    .detail-meta {
       font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .detail-section {
+      margin-bottom: 18px;
+    }
+
+    .detail-section h3 {
+      font-size: 15px;
+      margin: 0 0 6px;
+    }
+
+    .detail-section p,
+    .detail-section ul {
+      font-size: 14px;
+      margin: 4px 0;
+    }
+
+    .detail-section ul {
+      margin-left: 1.1em;
+      padding-left: 0;
+    }
+
+    .detail-box {
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      padding: 10px 12px;
+      font-size: 13px;
+      margin-top: 4px;
     }
 
     /* Footer */
 
-    .footer {
-      border-top: 1px solid rgba(0, 0, 0, 0.04);
-      padding: 16px 24px 18px;
+    footer {
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 14px 0 18px;
       font-size: 11px;
       color: var(--text-muted);
       background: #ffffff;
+      margin-top: auto;
     }
 
     .footer-inner {
-      max-width: 1040px;
-      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
     }
-
-    .footer-links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      text-underline-offset: 3px;
-    }
-
-    /* Responsive */
-
-    @media (max-width: 860px) {
-      .hero-inner {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .hero-right {
-        order: -1;
-      }
-      .two-column,
-      .contact-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    @media (max-width: 720px) {
-      .nav-links {
-        display: none;
-      }
-      .nav-cta {
-        display: none;
-      }
-      .nav-toggle {
-        display: inline-flex;
-        flex-direction: column;
-      }
-      .hero {
-        padding-top: 52px;
-      }
-      .section {
-        padding: 56px 20px;
-      }
-      .hero-title {
-        font-size: 26px;
-      }
-      .hero-subtitle {
-        font-size: 14px;
-      }
-    }
-
-    @media (min-width: 721px) {
-      .nav-mobile-menu {
-        display: none !important;
-      }
-    }
   </style>
 </head>
 <body>
-<div class="page">
-  <!-- NAV -->
-  <header class="nav" id="top">
-    <div class="nav-inner">
-      <div class="nav-left">
-        <div class="logo-mark">CN</div>
+<div class="wrapper">
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <!-- 後でロゴ画像に差し替え可 -->
+        <div class="brand-mark">CN</div>
         <div>
-          <div class="logo-text-main">Care Nexus</div>
-          <div class="logo-text-sub">Data &amp; AI for sustainable care</div>
+          <div class="brand-text-main">Care Nexus</div>
+          <div class="brand-text-sub">医療とデータの接点をつくる</div>
         </div>
       </div>
-      <div class="nav-right">
-        <nav class="nav-links">
-          <a href="#about">About</a>
-          <a href="#vision">Vision &amp; Mission</a>
-          <a href="#project1">Project #1</a>
-          <a href="#roadmap">今後の展望</a>
-        </nav>
-        <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-          お問い合わせ
-          <span class="icon">↗</span>
-        </button>
-        <button class="nav-toggle" aria-label="メニューを開く" onclick="toggleMobileNav()">
-          <div class="nav-toggle-bar"></div>
-          <div class="nav-toggle-bar"></div>
-          <div class="nav-toggle-bar"></div>
-        </button>
-      </div>
-    </div>
-    <div class="nav-mobile-menu" id="nav-mobile-menu">
-      <a href="#about" onclick="toggleMobileNav(false)">About</a>
-      <a href="#vision" onclick="toggleMobileNav(false)">Vision &amp; Mission</a>
-      <a href="#project1" onclick="toggleMobileNav(false)">Project #1</a>
-      <a href="#roadmap" onclick="toggleMobileNav(false)">今後の展望</a>
-      <a href="#contact" class="nav-mobile-cta" onclick="toggleMobileNav(false)">
-        <span>お問い合わせ</span>
-        <span class="icon">↗</span>
-      </a>
+      <nav>
+        <a href="#about">Care Nexus とは</a>
+        <a href="#vision">ビジョン</a>
+        <a href="#projects">プロジェクト</a>
+        <a href="#contact">お問い合わせ</a>
+      </nav>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-right">
-        <div class="hero-card">
-          <div class="hero-card-header">
-            <div class="hero-card-title">在宅ケア情報ダッシュボード（イメージ）</div>
-            <div class="hero-card-badge">AI &amp; DATA</div>
-          </div>
-          <div class="hero-metrics">
-            <div class="metric">
-              <div class="metric-label">在宅患者</div>
-              <div class="metric-value">42名</div>
-              <div class="metric-pill">記録自動生成中</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">本日の訪問件数</div>
-              <div class="metric-value">18件</div>
-              <div class="metric-pill">記録工数 △48%</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">AIが要注意と判断</div>
-              <div class="metric-value">3名</div>
-              <div class="metric-pill">早期介入を提案</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">加算算定の抜け漏れ</div>
-              <div class="metric-value">0件</div>
-              <div class="metric-pill">AIがチェック済み</div>
-            </div>
-          </div>
-          <div class="hero-card-footer">
-            <span>Care Nexus / 在宅ケア情報インフラ・コンセプト</span>
-            <span>リアルプロダクトは現在設計中</span>
-          </div>
-        </div>
-        <svg class="hero-orbit" viewBox="0 0 240 160">
-          <defs>
-            <linearGradient id="orb" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#9ad956" />
-              <stop offset="100%" stop-color="#5fb62a" />
-            </linearGradient>
-          </defs>
-          <circle cx="60" cy="80" r="46" fill="none" stroke="url(#orb)" stroke-width="1.5" />
-          <circle cx="160" cy="70" r="32" fill="none" stroke="url(#orb)" stroke-width="1.2" />
-          <circle cx="60" cy="80" r="3" fill="#9ad956" />
-          <circle cx="160" cy="70" r="2.4" fill="#9ad956" />
-          <circle cx="200" cy="40" r="2" fill="#cfff8b" />
-        </svg>
-      </div>
-      <div>
-        <div class="hero-eyebrow">
-          <div class="hero-eyebrow-dot"></div>
-          CARE NEXUS / PROJECT #1
-        </div>
-        <h1 class="hero-title">
-          データとAIで、<span class="highlight">在宅ケア</span>を<br />
-          もっと持続可能に。
-        </h1>
-        <p class="hero-subtitle">
-          Care Nexus は、データとAIを活用して医療・ケアの現場を支える新しい基盤づくりに挑戦するチームです。第一歩として、
-          在宅高齢者と訪問看護ステーションをつなぐ情報プラットフォームの開発に取り組んでいます。
-        </p>
-        <div class="hero-tags">
-          <span class="hero-tag">在宅医療・訪問看護</span>
-          <span class="hero-tag">AI 記録支援</span>
-          <span class="hero-tag">診療報酬算定サポート</span>
-          <span class="hero-tag">医療 × データインフラ</span>
-        </div>
-        <div class="hero-actions">
-          <button class="btn-primary" onclick="document.getElementById('project1').scrollIntoView({behavior:'smooth'})">
-            プロジェクト概要を見る
-            <span class="icon">↓</span>
-          </button>
-          <button class="btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-            協力・連携のご相談
-            <span class="icon">↗</span>
-          </button>
-        </div>
-        <div class="hero-note">
-          ※ 本ページは学生チーム Care Nexus のプロジェクト紹介ページです。法人化は検討中です。
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="section" id="about">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-label">About</div>
-        <h2 class="section-title">Care Nexus について</h2>
-        <p class="section-subtitle">
-          「データとAIの力で、医療・ケアをより持続可能な仕組みに変えていく」ことを目指すプロジェクトチームです。
-        </p>
-      </div>
-      <div class="two-column">
-        <div class="card">
-          <h3>私たちが向き合う構造的な課題</h3>
-          <p>
-            日本では高齢化が進み、在宅で暮らす高齢者が増えています。その生活・医療情報は紙の記録や電話・FAX、個別システムに分断され、
-            「訪問の瞬間ごとの断片」として扱われているのが現状です。
-          </p>
-          <p>
-            一方、訪問看護ステーションでは、詳細な記録作成や診療報酬算定などの間接業務が看護師の時間を圧迫し、本来価値を生む訪問ケアに十分な時間を割けないという構造的な非効率が続いています。
-          </p>
-          <p>
-            在宅高齢者を支える情報と業務の仕組みが断片的で非効率なために、利用者の安心と訪問看護ステーションの持続可能性がともに脅かされている――これが、Care
-            Nexus が向き合う社会課題です。
-          </p>
-        </div>
-        <div class="card">
-          <h3>Care Nexus というチーム</h3>
-          <p>
-            Care Nexus は、慶應義塾大学看護医療学部の学生を中心としたチームです。看護学の知見と、テクノロジー・ビジネスの視点を掛け合わせながら、
-            現場の専門家と対話しつつプロジェクトを進めています。
-          </p>
-          <p>
-            特定の一つのプロダクトだけを運営する組織ではなく、医療・看護の現場に眠るデータと新しいテクノロジーをつなぎなおし、経験や根性に依存してきた業務プロセスを、
-            持続可能で再現性のある仕組みに変えていくことを目指しています。
-          </p>
-          <div class="pill-row">
-            <span class="pill">学生発プロジェクト</span>
-            <span class="pill">医療・看護 × データ</span>
-            <span class="pill">在宅医療・地域医療</span>
-            <span class="pill">社会起業</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VISION & MISSION -->
-  <section class="section alt" id="vision">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-label">Vision &amp; Mission</div>
-        <h2 class="section-title">Care Nexus のめざす方向性</h2>
-      </div>
-      <div class="two-column">
-        <div class="card">
-          <h3>Vision</h3>
-          <p>
-            データとAIを活用して、医療・ケアの現場が「勘と経験」だけに頼らず、安心と持続可能性を両立できる社会インフラをつくる。
-          </p>
-          <p>
-            個別のツールを増やすのではなく、医療・ケアを支える情報の流れそのものをデザインし直すことで、現場と受け手の双方にとって「続けられる医療・ケア」の実現を目指します。
-          </p>
-        </div>
-        <div class="card">
-          <h3>Mission</h3>
-          <p>
-            データとAIを活用して、医療・ケアの現場で働く人と受け手の両方が、限られた資源のなかでも、安心と質をあきらめなくてよい仕組みをつくる。
-          </p>
-          <p>
-            Care Nexus は、個々のプロダクト開発をゴールとするのではなく、「医療・ケアを支えるデータ基盤そのものをどう育てていくか」という視点から、現場と共創しながら実装を進めていきます。
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECT #1 -->
-  <section class="section" id="project1">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-label">Project #1</div>
-        <h2 class="section-title">在宅高齢者 × 訪問看護向け 情報プラットフォーム</h2>
-        <p class="section-subtitle">
-          在宅で暮らす高齢者の情報をシームレスに集約し、訪問看護師が本来のケアに集中できるようにすることが、最初のフォーカスです。
-        </p>
-      </div>
-      <div class="two-column">
-        <div class="card">
-          <h3>課題に対するアプローチ</h3>
-          <ul>
-            <li>既存のバイタルデバイスや訪問看護記録システムと連携し、在宅患者の情報をクラウド上で一元管理</li>
-            <li>「訪問の瞬間ごとの断片」だった情報を、連続したデータとして把握できる環境を整備</li>
-            <li>訪問看護師の記録・算定業務をAIが自動アシストし、事務負担を大きく削減</li>
-          </ul>
-          <p>
-            本ソリューションは、既存プロダクトの「点」をつなぎ合わせ、訪問看護ステーションの中で使える「面」としての情報基盤をつくることを狙いとしています。
-          </p>
-        </div>
-        <div class="card">
-          <h3>提供価値（想定）</h3>
-          <p>
-            ● 看護師にとって：記録・SOAP作成・診療報酬算定補助などをAIが担い、事務ではなく本来のケアに時間を使えるようにする。<br />
-            ● ステーションにとって：加算算定の抜け漏れ防止と業務可視化により、生産性向上と財務の安定に寄与する。
-          </p>
-          <p>
-            初期フェーズでは、数拠点の訪問看護ステーションと協力しながら、実際の業務フローの中でどの程度負担軽減・算定改善が見込めるかを検証していく予定です。
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROADMAP / FUTURE -->
-  <section class="section alt" id="roadmap">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-label">Future</div>
-        <h2 class="section-title">今後の展望</h2>
-      </div>
-      <div class="card">
-        <p>
-          在宅高齢者と訪問看護のプロジェクトは、Care Nexus の最初の一歩に過ぎません。今後は、在宅医療や地域包括ケア、慢性疾患マネジメント、退院後支援など、
-          医療・ケアの連続性が重要な領域に対しても、データとAIを活用したプロダクト・サービスを展開していく構想です。
-        </p>
-        <p>
-          個々のアプリケーションを単発で作るのではなく、「医療・ケアのデータ基盤をどう育てるか」という視点から、長期的に取り組んでいきます。プロジェクトごとに
-          <strong>Project #2, #3...</strong> と拡張しつつも、共通の哲学と技術基盤を持つ「Care Nexus
-          プラットフォーム」として育てていくことを目指しています。
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="section" id="contact">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-label">Contact</div>
-        <h2 class="section-title">協力・連携のご相談</h2>
-        <p class="section-subtitle">
-          実証フィールドとしてのご協力や、専門的なアドバイス、技術連携のご相談などを歓迎しています。
-        </p>
-      </div>
-      <div class="contact-grid">
-        <div class="contact-card">
-          <p>
-            ● プロトタイプの検証に協力してくださる訪問看護ステーションの方<br />
-            ● 在宅医療・訪問看護・地域包括ケアの専門家の方<br />
-            ● 医療・介護向けIoTデバイスやシステムをお持ちの企業の方
-          </p>
-          <p>との対話を歓迎しています。</p>
-          <p class="contact-note">
-            現在は学生チームとしての活動段階のため、まずは情報交換・意見交換ベースでのお打ち合わせからスタートできればと考えています。
-          </p>
-        </div>
+  <main>
+    <!-- Hero -->
+    <div class="hero">
+      <div class="inner hero-grid">
         <div>
-          <div class="contact-card">
-            <p>ご連絡は、以下のメールアドレス宛にお願いいたします。</p>
-            <div class="contact-email">
-              <span class="icon">✉</span>
-              <span>example@keio.jp</span>
+          <div class="hero-eyebrow">Student-led healthcare project</div>
+          <h1 class="hero-title">
+            データとAIで、<span>医療をより持続可能に</span>。
+          </h1>
+          <p class="hero-lead">
+            Care Nexus は、医療・看護の現場とデータ・AIをつなぎ、  
+            「現場の実感」と「技術」を両立させた仕組みづくりに取り組む学生チームです。
+          </p>
+          <p class="hero-text-sub">
+            まずは在宅医療・訪問看護の領域から、小さく検証しながら、  
+            現実的に機能するプロダクトとデータ基盤のあり方を探っています。
+          </p>
+          <p class="hero-note">
+            ※ 本プロジェクトは現在、学生有志による活動段階です。法人化は今後検討予定です。
+          </p>
+        </div>
+        <div class="hero-box">
+          <h2>現在フォーカスしていること</h2>
+          <p>
+            在宅で暮らす高齢者の情報が「訪問の瞬間ごとの断片」になってしまうこと、  
+            訪問看護師の記録・算定業務が大きな負担になっていること。この2つの構造的な課題に対し、
+            データの整理とAIによる業務支援でアプローチするプロジェクトを進めています。
+          </p>
+          <p>
+            プロジェクト第1弾の概要は  
+            <a href="#projects">こちら</a> から、詳細は  
+            <a href="#project1-detail">こちら</a> からご覧いただけます。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section id="about">
+      <div class="inner">
+        <h2 class="section-title">Care Nexus とは</h2>
+        <p class="section-sub">
+          特定の1つの製品をつくる集団ではなく、医療とデータの接点を長期的に育てていくための「場」として存在しています。
+        </p>
+        <div class="two-column">
+          <div class="card">
+            <h3>向き合っている問い</h3>
+            <p>
+              日本では高齢化が進み、在宅で暮らす高齢者が増える一方で、その生活・医療情報は紙の記録や電話・FAX、個別システムに分断されています。
+              現場では、「患者さんの状態をもっと連続的に把握したい」「記録や算定に追われてしまう」という声が少なくありません。
+            </p>
+            <p>
+              Care Nexus は、こうした構造的な問題を「データの流れ」「業務プロセス」「制度」の観点から捉え直し、
+              小さなプロジェクトを積み重ねながら、現場にフィットする仕組みを形にしていくことを目指しています。
+            </p>
+          </div>
+          <div class="card">
+            <h3>チームの背景</h3>
+            <p>
+              慶應義塾大学看護医療学部の学生を中心に、在宅医療・地域医療に関心のあるメンバーで構成されています。
+              現場の専門家の方々に助言をいただきながら、医療知識とデータ／AI技術をどう安全に組み合わせるかを検討しています。
+            </p>
+            <p>
+              技術そのものを目的にするのではなく、「現場にとって意味があるか」「運用できるか」を軸に、検討と試作を繰り返していきます。
+            </p>
+            <div class="chip-row">
+              <span class="chip">在宅医療・訪問看護</span>
+              <span class="chip">医療 × データ</span>
+              <span class="chip">学生発プロジェクト</span>
             </div>
-            <p class="contact-note">
-              ※ 実際に利用する代表メールアドレスに差し替えてください。必要に応じてフォームやSNSリンクも追加可能です。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision / Mission -->
+    <section id="vision" class="alt">
+      <div class="inner">
+        <h2 class="section-title">ビジョンとミッション</h2>
+        <p class="section-sub">Care Nexus 全体としての方向性です。個々のプロジェクトはこの枠組みの中で位置づけています。</p>
+        <div class="two-column">
+          <div class="card">
+            <h3>Vision</h3>
+            <p>
+              データとAIを活用して、医療・ケアの現場が「勘と経験」だけに頼らず、  
+              安心と持続可能性を両立できる社会インフラをつくる。
+            </p>
+            <p>
+              個々のアプリケーションではなく、医療・ケアを支える情報の流れそのものを丁寧に設計し直すことを目指します。
+            </p>
+          </div>
+          <div class="card">
+            <h3>Mission</h3>
+            <p>
+              データとAIを活用して、医療・ケアの現場で働く人と受け手の両方が、  
+              限られた資源のなかでも、安心と質をあきらめなくてよい仕組みをつくる。
+            </p>
+            <p>
+              そのために、現場と対話しながら小さく試し、実際に使われる形に整えていくプロジェクトを継続的に立ち上げていきます。
             </p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div>© <span id="year"></span> Care Nexus. All rights reserved.</div>
-      <div class="footer-links">
-        <span>Student project / 慶應義塾大学看護医療学部 有志チーム</span>
+    <!-- Projects 概要 -->
+    <section id="projects">
+      <div class="inner">
+        <h2 class="section-title">現在進行中のプロジェクト</h2>
+        <p class="section-sub">
+          第1弾は、在宅高齢者と訪問看護ステーションの「情報の断片化」と「記録・算定業務の負担」に焦点を当てたプロジェクトです。
+          ここでは概要のみを記載し、詳しい内容はページ下部の詳細セクションで説明しています。
+        </p>
+        <div class="project-list">
+          <article class="project-card">
+            <div class="project-label">Project 01</div>
+            <div class="project-name">在宅高齢者 × 訪問看護向け 情報プラットフォーム</div>
+            <div class="project-meta">在宅患者情報の集約と、記録・算定業務の支援</div>
+            <p>
+              在宅で暮らす高齢者の情報を既存プロダクトから集約し、訪問看護ステーション内で時系列に把握できるようにすること、
+              そしてAIを用いて記録・診療報酬算定の業務負担を減らすことを目指しているプロジェクトです。
+            </p>
+            <a href="#project1-detail" class="more">
+              プロジェクトの詳細を見る →
+            </a>
+          </article>
+        </div>
       </div>
+    </section>
+
+    <!-- Project 01 詳細セクション -->
+    <section id="project1-detail" class="alt">
+      <div class="inner">
+        <div class="breadcrumb">
+          <a href="#projects">プロジェクト一覧</a> / Project 01 詳細
+        </div>
+        <div class="detail-label">Project 01</div>
+        <h2 class="detail-title">在宅高齢者 × 訪問看護向け 情報プラットフォーム</h2>
+        <div class="detail-meta">
+          在宅で暮らす高齢者の情報の「断片化」と、訪問看護ステーションにおける記録・算定業務の負担に対するアプローチ。
+        </div>
+
+        <div class="detail-section">
+          <h3>背景と問題意識</h3>
+          <p>
+            在宅で暮らす高齢者の生活・医療情報は、紙の記録、電話・FAX、バイタルデバイスの画面、個別システムなどに分散しており、
+            訪問のたびに別々の形で扱われることが多くなっています。その結果、
+          </p>
+          <ul>
+            <li>急変や悪化の兆候を、連続した情報として捉えにくい</li>
+            <li>多職種と情報を共有する際にも、再入力・口頭説明の負担がかかる</li>
+          </ul>
+          <p>
+            一方で、訪問看護ステーション側では詳細な記録作成や診療報酬算定に関わる事務作業が看護師の時間を圧迫し、
+            「本来のケア」と「記録・算定」の両立に苦労している状況があります。
+          </p>
+        </div>
+
+        <div class="detail-section">
+          <h3>プロジェクトのねらい</h3>
+          <p>
+            このプロジェクトでは、既に存在しているバイタルデバイスや訪問看護記録システムと連携し、
+            在宅患者の情報を Care Nexus が用意するクラウド上に整理して集約することをめざします。
+          </p>
+          <ul>
+            <li>患者ごとの情報を、訪問ごとの断片ではなく、時系列で追える形にする</li>
+            <li>訪問時に看護師が入力する内容をもとに、AIが記録・算定作業をサポートする</li>
+          </ul>
+          <div class="detail-box">
+            現時点では「どこまで自動化できるか」「安全性・法的な要件をどう満たすか」を慎重に検討している段階であり、
+            現場の方々との議論を通じて、実際に成立しうる機能の範囲を見極めていきます。
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h3>想定している主な機能</h3>
+          <p>具体的な実装は今後の検証結果に応じて調整しますが、現時点では次のような方向性を想定しています。</p>
+          <ul>
+            <li>
+              既存のバイタルデバイス・記録システムとの同期機能  
+              ─ API やファイル連携を使い、データを手入力ではなく自動で取り込むイメージ
+            </li>
+            <li>
+              クラウド上での患者プロファイル表示  
+              ─ バイタル推移や訪問記録を時系列で確認できる画面
+            </li>
+            <li>
+              訪問時記録の AI 補助  
+              ─ 看護師が入力した要点から、SOAP 形式の記録案や家族向け説明のたたきを自動生成
+            </li>
+            <li>
+              診療報酬算定のチェック機能  
+              ─ どの加算が算定可能か、必要な記録がそろっているかを確認する補助
+            </li>
+          </ul>
+        </div>
+
+        <div class="detail-section">
+          <h3>検証の進め方（イメージ）</h3>
+          <p>
+            すぐに大規模導入を目指すのではなく、少数の訪問看護ステーションと一緒に、
+            「どの部分でどの程度負担が減るか」「運用上のリスクはないか」を確認しながら進めていく計画です。
+          </p>
+          <ul>
+            <li>現状の業務フローを丁寧にヒアリング・可視化する</li>
+            <li>紙や既存システムのままでも実現できる改善と、システムがあって初めて可能な改善を分けて考える</li>
+            <li>小さなプロトタイプを試し、フィードバックをもとに修正・縮小・拡張を繰り返す</li>
+          </ul>
+        </div>
+
+        <div class="detail-section">
+          <h3>協力いただきたいこと</h3>
+          <p>
+            このプロジェクトはまだ設計段階にあり、「現場から見てどうか」「実際の業務に乗るか」を確認しながら進めていく必要があります。
+            そのため、以下のような形でご協力いただける方を探しています。
+          </p>
+          <ul>
+            <li>課題感や現場の実情について、ざっくばらんに教えていただけるヒアリングへのご協力</li>
+            <li>ごく小さな範囲でのプロトタイプ試験導入</li>
+            <li>法制度・セキュリティ・医療情報の扱いに関する専門的な助言</li>
+          </ul>
+          <div class="detail-box">
+            ご関心をお持ちいただけた場合は、下記の連絡先宛に「Project 01 について」と明記の上、ご一報いただけますと幸いです。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="inner">
+        <h2 class="section-title">協力・連携のご相談</h2>
+        <p class="section-sub">
+          実際の現場でのニーズや、技術・制度面での論点を教えていただける方との対話を歓迎しています。
+        </p>
+        <div class="contact-box">
+          <p>
+            ● プロトタイプ検証にご協力いただける訪問看護ステーション・在宅医療機関の方<br />
+            ● 在宅医療・地域包括ケアに詳しい医療職・研究者の方<br />
+            ● 医療・介護向けのデータ基盤やAI活用に関心のある企業・エンジニアの方
+          </p>
+          <p>がいらっしゃいましたら、ぜひ一度オンラインでお話させてください。</p>
+          <div class="contact-email">
+            <span>✉</span>
+            <span>example@keio.jp</span>
+          </div>
+          <p class="contact-note">
+            ※ 実際に利用する代表メールアドレスに差し替えてください。必要に応じてフォームやSNSリンクも追加できます。
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="inner footer-inner">
+      <div>© <span id="year"></span> Care Nexus</div>
+      <div>慶應義塾大学 看護医療学部 有志チーム</div>
     </div>
   </footer>
 </div>
 
 <script>
-  // 年の自動更新
   document.getElementById("year").textContent = new Date().getFullYear();
-
-  // モバイルナビ開閉
-  function toggleMobileNav(forceClose) {
-    const body = document.body;
-    const menu = document.getElementById("nav-mobile-menu");
-    const isOpen = body.classList.contains("nav-mobile-open");
-
-    if (forceClose === false || isOpen) {
-      body.classList.remove("nav-mobile-open");
-      menu.style.display = "none";
-    } else {
-      body.classList.add("nav-mobile-open");
-      menu.style.display = "block";
-    }
-  }
-
-  // スクロール時にモバイルメニューが開いていたら閉じる
-  window.addEventListener("scroll", function () {
-    if (document.body.classList.contains("nav-mobile-open")) {
-      toggleMobileNav(false);
-    }
-  });
 </script>
 </body>
 </html>
