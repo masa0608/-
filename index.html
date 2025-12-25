@@ -18,8 +18,6 @@
       --bg: #ffffff;
       --bg-soft: #f7fafc;
       --border-soft: rgba(148, 163, 184, 0.35);
-      --radius: 18px;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.10);
       --transition-fast: 0.18s ease-out;
       --transition-med: 0.26s ease-out;
     }
@@ -33,6 +31,7 @@
       padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         "Noto Sans JP", sans-serif;
+      font-size: 15px;
       color: var(--ink);
       background: #f3f4f6;
       line-height: 1.7;
@@ -82,7 +81,7 @@
       top: 0;
       z-index: 50;
       backdrop-filter: blur(12px);
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       border-bottom: 1px solid rgba(209, 213, 219, 0.7);
     }
 
@@ -294,10 +293,10 @@
     }
 
     .hero-lead {
-      font-size: 14px;
+      font-size: 15px;
       color: #4b5563;
-      margin: 0 0 16px;
-      max-width: 420px;
+      margin: 0 0 18px;
+      max-width: 460px;
     }
 
     .hero-tags {
@@ -368,9 +367,11 @@
 
     .hero-note {
       margin-top: 10px;
-      font-size: 11px;
+      font-size: 12px;
       color: #6b7280;
     }
+
+    /* Hero - right panel（これは“カード”というよりデータビジュアル扱いで残します） */
 
     .hero-panel {
       border-radius: 28px;
@@ -388,7 +389,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 12px;
+      font-size: 13px;
       margin-bottom: 12px;
     }
 
@@ -419,7 +420,7 @@
       padding: 10px 11px;
       background: rgba(15, 23, 42, 0.94);
       border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 11px;
+      font-size: 12px;
     }
 
     .hero-metric-label {
@@ -435,7 +436,7 @@
 
     .hero-metric-foot {
       margin-top: 3px;
-      font-size: 10px;
+      font-size: 11px;
       color: #9ca3af;
     }
 
@@ -449,7 +450,7 @@
       padding: 3px 8px;
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.7);
-      font-size: 10px;
+      font-size: 11px;
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -466,7 +467,7 @@
     .hero-panel-foot {
       border-top: 1px dashed rgba(148, 163, 184, 0.6);
       padding-top: 6px;
-      font-size: 10px;
+      font-size: 11px;
       color: #9ca3af;
       display: flex;
       justify-content: space-between;
@@ -515,17 +516,17 @@
     }
 
     .section-title {
-      font-size: 22px;
-      margin: 0 0 4px;
+      font-size: 24px;
+      margin: 0 0 6px;
     }
 
     .section-sub {
-      font-size: 13px;
+      font-size: 14px;
       color: #6b7280;
-      max-width: 560px;
+      max-width: 580px;
     }
 
-    /* About - 3ストライド */
+    /* Mission / About */
 
     .about-grid {
       max-width: 1120px;
@@ -533,12 +534,14 @@
       padding: 0 20px;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
+      gap: 32px;
+      border-top: 1px solid rgba(209, 213, 219, 0.8);
+      padding-top: 22px;
     }
 
     .about-block {
-      padding: 12px 6px 4px;
-      font-size: 13px;
+      font-size: 14px;
+      position: relative;
     }
 
     .about-label {
@@ -550,20 +553,13 @@
     }
 
     .about-heading {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 600;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .about-body {
-      font-size: 13px;
-      color: #4b5563;
-    }
-
-    .about-list {
-      margin: 4px 0 0;
-      padding-left: 1.1em;
-      font-size: 13px;
+      font-size: 14px;
       color: #4b5563;
     }
 
@@ -571,7 +567,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
     .pill {
@@ -583,25 +579,25 @@
       background: #f9fafb;
     }
 
-    /* Focus line */
+    /* Focus */
 
     .focus-line {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 6px 20px 0;
+      padding: 0 20px;
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 22px;
-      align-items: center;
+      gap: 26px;
+      align-items: flex-start;
     }
 
     .focus-main-title {
       font-size: 24px;
-      margin: 0 0 6px;
+      margin: 0 0 8px;
     }
 
     .focus-main-sub {
-      font-size: 13px;
+      font-size: 14px;
       color: #6b7280;
       max-width: 420px;
     }
@@ -610,7 +606,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 8px;
+      margin-top: 12px;
     }
 
     .focus-tag {
@@ -624,19 +620,19 @@
 
     .timeline {
       position: relative;
-      padding-left: 16px;
+      padding-left: 18px;
       border-left: 1px solid rgba(148, 163, 184, 0.7);
-      margin-top: 12px;
+      margin-top: 6px;
     }
 
     .timeline-item {
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       position: relative;
     }
 
     .timeline-dot {
       position: absolute;
-      left: -9px;
+      left: -10px;
       top: 4px;
       width: 10px;
       height: 10px;
@@ -646,37 +642,32 @@
     }
 
     .timeline-title {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
       margin-bottom: 2px;
     }
 
     .timeline-text {
-      font-size: 12px;
+      font-size: 13px;
       color: #6b7280;
     }
 
-    /* Current Initiative card */
+    /* Project 01 概要（枠ではなく、セクション全体を使う） */
 
     .initiative-wrap {
       max-width: 1120px;
       margin: 0 auto;
       padding: 0 20px;
+      border-top: 1px solid rgba(209, 213, 219, 0.8);
+      padding-top: 22px;
     }
 
-    .initiative-card {
-      position: relative;
-      border-radius: 24px;
-      padding: 22px 22px 18px;
-      background:
-        radial-gradient(circle at 0% 0%, #ecfccb, transparent 55%),
-        linear-gradient(135deg, #ffffff, #eff6ff);
-      border: 1px solid rgba(209, 213, 219, 0.9);
-      box-shadow: var(--shadow-soft);
+    .initiative-inner {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 20px;
-      align-items: center;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 30px;
+      align-items: flex-start;
+      position: relative;
     }
 
     .initiative-label {
@@ -684,18 +675,18 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: #9ca3af;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .initiative-title {
-      font-size: 18px;
-      margin: 0 0 6px;
+      font-size: 20px;
+      margin: 0 0 8px;
     }
 
     .initiative-lead {
-      font-size: 13px;
+      font-size: 14px;
       color: #4b5563;
-      margin: 0 0 10px;
+      margin: 0 0 14px;
     }
 
     .chip-row {
@@ -718,6 +709,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      margin-top: 6px;
     }
 
     .btn-outline {
@@ -725,7 +717,7 @@
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.8);
       background: #ffffff;
-      font-size: 12px;
+      font-size: 13px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -743,18 +735,20 @@
     .initiative-mini {
       font-size: 12px;
       color: #6b7280;
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
-    .initiative-meta {
-      font-size: 12px;
-      color: #6b7280;
+    .initiative-meta-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #374151;
     }
 
     .initiative-list {
-      margin: 8px 0 0;
+      margin: 0;
       padding-left: 1.1em;
-      font-size: 12px;
+      font-size: 13px;
       color: #4b5563;
     }
 
@@ -763,9 +757,9 @@
       inset: auto -40px -40px auto;
       width: 160px;
       height: 160px;
-      opacity: 0.18;
+      opacity: 0.16;
       pointer-events: none;
-      filter: blur(0.2px);
+      filter: blur(0.3px);
     }
 
     /* Contact */
@@ -776,29 +770,29 @@
       padding: 0 20px;
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 22px;
+      gap: 26px;
       align-items: flex-start;
+      border-top: 1px solid rgba(209, 213, 219, 0.8);
+      padding-top: 22px;
     }
 
     .contact-main {
-      font-size: 13px;
+      font-size: 14px;
       color: #4b5563;
     }
 
     .contact-list {
       margin: 6px 0 0;
       padding-left: 1.1em;
-      font-size: 13px;
+      font-size: 14px;
     }
 
     .contact-card {
-      border-radius: 20px;
-      padding: 16px 18px 14px;
-      background: #050816;
-      color: #e5e7eb;
-      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 13px;
+      padding: 8px 0;
+      font-size: 14px;
+      color: #111827;
+      border-left: 3px solid #050816;
+      padding-left: 14px;
     }
 
     .contact-email {
@@ -808,7 +802,7 @@
       padding: 5px 10px;
       border-radius: 999px;
       border: 1px dashed rgba(148, 163, 184, 0.8);
-      background: rgba(15, 23, 42, 0.9);
+      background: #ffffff;
       font-family: ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       font-size: 13px;
       margin-top: 6px;
@@ -816,7 +810,7 @@
 
     .contact-note {
       font-size: 12px;
-      color: #9ca3af;
+      color: #6b7280;
       margin-top: 8px;
     }
 
@@ -891,7 +885,7 @@
       .focus-line {
         grid-template-columns: minmax(0, 1fr);
       }
-      .initiative-card {
+      .initiative-inner {
         grid-template-columns: minmax(0, 1fr);
       }
       .contact-wrap {
@@ -1033,7 +1027,8 @@
                   <span class="badge-dot"></span> 記録の下ごしらえを AI に
                 </div>
                 <div class="badge" style="margin-top:4px;">
-                  <span class="badge-dot" style="background:#a855f7;"></span> データを現場の言葉に戻す
+                  <span class="badge-dot" style="background:#a855f7;"></span>
+                  データを現場の言葉に戻す
                 </div>
               </div>
             </div>
@@ -1084,7 +1079,7 @@
         <div class="about-label">WHAT</div>
         <div class="about-heading">データとAIで下支えする</div>
         <p class="about-body">
-          情報を一ヶ所に集約し、AI が記録や整理の「下ごしらえ」を担うことで、  
+          情報を一か所に集約し、AI が記録や整理の「下ごしらえ」を担うことで、  
           人はケアや対話に集中できる状態を目指します。
         </p>
       </div>
@@ -1152,7 +1147,7 @@
     </div>
   </section>
 
-  <!-- Current Initiative (Project 01 概要だけ) -->
+  <!-- Current Initiative -->
   <section class="section" id="initiative">
     <div class="section-head">
       <div class="section-kicker">CURRENT INITIATIVE</div>
@@ -1162,7 +1157,7 @@
       </p>
     </div>
     <div class="initiative-wrap">
-      <article class="initiative-card reveal">
+      <div class="initiative-inner reveal">
         <div>
           <div class="initiative-label">OUTLINE</div>
           <h3 class="initiative-title">在宅患者情報の「面」での把握と、記録・算定の下支え</h3>
@@ -1176,7 +1171,7 @@
             <span class="chip">加算算定のチェック支援</span>
           </div>
           <div class="initiative-actions">
-            <!-- 詳細ページは別途 project01.html などで作成予定 -->
+            <!-- 詳細ページは別途 project01.html などで作成 -->
             <a href="project01.html" class="btn-outline">
               プロジェクトの詳細を見る
               <span>↗</span>
@@ -1187,8 +1182,8 @@
           </div>
         </div>
         <div>
-          <div class="initiative-meta">
-            こんな問いからスタートしています：
+          <div class="initiative-meta-title">
+            このプロジェクトは、次のような問いからスタートしています：
           </div>
           <ul class="initiative-list">
             <li>在宅患者さんの「普段の状態」を、訪問以外の時間も含めてどう把握するか</li>
@@ -1206,7 +1201,7 @@
           </defs>
           <circle cx="100" cy="100" r="90" fill="url(#orb)" />
         </svg>
-      </article>
+      </div>
     </div>
   </section>
 
@@ -1221,20 +1216,20 @@
     </div>
     <div class="contact-wrap">
       <div class="contact-main reveal-left">
-        <h3 style="margin:0 0 6px;font-size:15px;">特にお話ししたいと考えている方</h3>
+        <h3 style="margin:0 0 8px;font-size:16px;">特にお話ししたいと考えている方</h3>
         <ul class="contact-list">
           <li>在宅医療・訪問看護・地域包括ケアの現場で働かれている方</li>
           <li>医療情報・個人情報保護・診療報酬に詳しい専門職・研究者の方</li>
           <li>医療・ヘルスケア領域での IT / データ活用に関心のある企業・エンジニアの方</li>
         </ul>
-        <p style="font-size:13px;margin-top:8px;color:#6b7280;">
+        <p style="font-size:14px;margin-top:10px;color:#6b7280;">
           「まだアイデア段階だけど」「少しだけ意見を伝えたい」くらいの温度感でも構いません。  
           一度オンラインでお話させていただけると嬉しいです。
         </p>
       </div>
       <div class="contact-card reveal-right">
-        <h3 style="margin:0 0 6px;font-size:15px;">ご連絡方法</h3>
-        <p style="font-size:13px;margin:4px 0;">
+        <h3 style="margin:0 0 6px;font-size:16px;">ご連絡方法</h3>
+        <p style="font-size:14px;margin:4px 0;">
           下記メールアドレス宛に、「Care Nexus について」と件名を添えてご連絡ください。
         </p>
         <div class="contact-email">
