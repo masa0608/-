@@ -10,20 +10,21 @@
   />
   <style>
     :root {
-      --accent: #9ad956;    /* ロゴに近い黄緑 */
-      --accent-dark: #5a9a24;
-      --accent-soft: #f3f9e7;
-      --bg: #ffffff;
-      --bg-alt: #f5f6fa;
-      --bg-deep: #050816;
-      --text: #111827;
+      --accent: #9be15d;
+      --accent-strong: #4caf50;
+      --accent-soft: #efffed;
+      --bg: #050816;
+      --bg-card: #0b1020;
+      --bg-alt: #f5f7fb;
+      --text-main: #0f172a;
       --text-muted: #6b7280;
-      --border: #e5e7eb;
-      --radius: 14px;
-      --radius-lg: 20px;
-      --shadow-soft: 0 14px 40px rgba(15, 23, 42, 0.16);
-      --shadow-card: 0 10px 28px rgba(15, 23, 42, 0.10);
-      --transition: 0.2s ease-out;
+      --border-soft: rgba(148, 163, 184, 0.35);
+      --radius: 18px;
+      --radius-lg: 26px;
+      --shadow-soft: 0 22px 60px rgba(15, 23, 42, 0.36);
+      --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.3);
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.26s ease-out;
     }
 
     * {
@@ -35,9 +36,12 @@
       padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         "Noto Sans JP", sans-serif;
-      color: var(--text);
-      background: radial-gradient(circle at top, #f7fee7 0, #ffffff 45%, #f4f4f5 100%);
-      line-height: 1.7;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 0% 0%, #1f2937 0, #020617 45%),
+        radial-gradient(circle at 100% 0%, #16a34a33 0, #020617 35%);
+      background-color: #020617;
+      line-height: 1.6;
       scroll-behavior: smooth;
     }
 
@@ -58,9 +62,23 @@
     }
 
     .inner {
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 0 20px;
+    }
+
+    /* Scroll bar */
+
+    .scroll-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0;
+      z-index: 50;
+      background: linear-gradient(90deg, #bbf7d0, #22c55e, #a5b4fc);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
+      transform-origin: left;
     }
 
     /* Header */
@@ -68,20 +86,24 @@
     header {
       position: sticky;
       top: 0;
-      z-index: 20;
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.9);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+      z-index: 40;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(
+        to right,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.9)
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.45);
     }
 
     .header-inner {
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 20px;
     }
 
     .brand {
@@ -90,74 +112,97 @@
       gap: 10px;
     }
 
-    /* ここは後でロゴ画像に差し替えてOK */
+    /* 後でロゴ画像に差し替え可 */
     .brand-mark {
       width: 34px;
       height: 34px;
-      border-radius: 11px;
-      background: radial-gradient(circle at 20% 20%, #eaff9e, var(--accent));
+      border-radius: 999px;
+      background:
+        conic-gradient(from 200deg, #bbf7d0, #22c55e, #4ade80, #bbf7d0);
+      padding: 2px;
+      box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.8),
+                  0 15px 35px rgba(34, 197, 94, 0.55);
+    }
+
+    .brand-mark-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      background: #020617;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #ecfeff;
       font-size: 16px;
       font-weight: 800;
-      color: #02100a;
-      box-shadow: 0 12px 30px rgba(154, 217, 86, 0.6);
+      letter-spacing: 0.06em;
     }
 
     .brand-text-main {
       font-size: 18px;
       font-weight: 700;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
+      color: #e5e7eb;
     }
 
     .brand-text-sub {
       font-size: 11px;
-      color: var(--text-muted);
+      color: #9ca3af;
     }
 
     nav {
       display: flex;
       align-items: center;
-      gap: 18px;
-      font-size: 14px;
+      gap: 22px;
+      font-size: 13px;
+      color: #e5e7eb;
     }
 
     nav a {
+      position: relative;
       padding-bottom: 2px;
-      border-bottom: 2px solid transparent;
     }
 
-    nav a:hover {
-      border-bottom-color: var(--accent);
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #a3e635, #22c55e);
+      transition: var(--transition-fast);
+    }
+
+    nav a:hover::after {
+      width: 100%;
     }
 
     .nav-cta {
       padding: 7px 14px;
       border-radius: 999px;
-      background: #050816;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
       color: #f9fafb;
-      font-size: 13px;
-      border: none;
+      font-size: 12px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
-      transition: var(--transition);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.7);
+      transition: var(--transition-med);
     }
 
     .nav-cta span.icon {
-      font-size: 14px;
+      font-size: 13px;
       transform: translateY(1px);
     }
 
     .nav-cta:hover {
+      background: #020617;
       transform: translateY(-1px);
-      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.5);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
     }
-
-    /* Mobile nav */
 
     .nav-toggle {
       display: none;
@@ -171,9 +216,9 @@
       width: 22px;
       height: 2px;
       border-radius: 999px;
-      background: #111827;
+      background: #e5e7eb;
       margin: 3px 0;
-      transition: 0.15s;
+      transition: 0.16s;
     }
 
     .nav-open .nav-toggle-bar:nth-child(1) {
@@ -188,20 +233,21 @@
 
     .nav-mobile {
       display: none;
-      border-top: 1px solid rgba(148, 163, 184, 0.3);
-      background: rgba(255, 255, 255, 0.97);
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.98);
     }
 
     .nav-mobile-inner {
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 8px 20px 10px;
-      font-size: 14px;
+      padding: 8px 20px 12px;
+      font-size: 13px;
+      color: #e5e7eb;
     }
 
     .nav-mobile-inner a {
       display: block;
-      padding: 6px 0;
+      padding: 7px 0;
       border-bottom: 1px dashed rgba(148, 163, 184, 0.5);
     }
 
@@ -213,34 +259,34 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      margin-top: 8px;
+      margin-top: 10px;
       padding: 7px 14px;
       border-radius: 999px;
-      background: #050816;
-      color: #f9fafb;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
+      background: #020617;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.9);
     }
 
     /* Hero */
 
     .hero {
-      padding: 56px 20px 42px;
+      padding: 60px 20px 52px;
     }
 
     .hero-inner {
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
       gap: 40px;
       align-items: center;
     }
 
     .hero-eyebrow {
       font-size: 11px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
+      color: #9ca3af;
       margin-bottom: 10px;
     }
 
@@ -248,41 +294,36 @@
       font-size: 32px;
       line-height: 1.35;
       margin: 0 0 12px;
+      color: #f9fafb;
     }
 
     .hero-title span.highlight {
-      background: linear-gradient(120deg, #d9f99d, #86efac);
+      background: radial-gradient(circle at 10% 0%, #bbf7d0, #4ade80);
       -webkit-background-clip: text;
       color: transparent;
     }
 
     .hero-lead {
       font-size: 14px;
-      color: var(--text-muted);
+      color: #cbd5f5;
       margin: 0 0 16px;
+      max-width: 420px;
     }
 
-    .hero-bullets {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .hero-bullet {
-      font-size: 12px;
-      color: var(--text-muted);
+    .hero-tags {
       display: flex;
-      align-items: center;
-      gap: 6px;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
     }
 
-    .hero-bullet span.dot {
-      width: 7px;
-      height: 7px;
+    .tag {
+      padding: 4px 10px;
       border-radius: 999px;
-      background: var(--accent);
-      flex-shrink: 0;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 11px;
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.7);
     }
 
     .hero-actions {
@@ -296,153 +337,183 @@
       border-radius: 999px;
       border: none;
       cursor: pointer;
-      background: #050816;
-      color: #f9fafb;
+      background: #f9fafb;
+      color: #020617;
       font-size: 13px;
       font-weight: 500;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: var(--transition);
-      box-shadow: var(--shadow-soft);
+      transition: var(--transition-med);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
     }
 
     .btn-primary span.icon {
-      font-size: 14px;
+      font-size: 15px;
       transform: translateY(1px);
     }
 
     .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
     }
 
-    .btn-secondary {
+    .btn-ghost {
       padding: 9px 14px;
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.7);
-      background: rgba(255, 255, 255, 0.8);
+      background: transparent;
+      color: #e5e7eb;
       font-size: 13px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       cursor: pointer;
-      transition: var(--transition);
-      color: #111827;
+      transition: var(--transition-med);
     }
 
-    .btn-secondary:hover {
-      background: #e5e7eb;
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.8);
     }
 
     .hero-note {
       margin-top: 10px;
       font-size: 11px;
-      color: var(--text-muted);
+      color: #9ca3af;
     }
 
     .hero-panel {
       border-radius: var(--radius-lg);
       padding: 18px 18px 16px;
-      background: radial-gradient(circle at top left, #ecfccb, #e5e7eb);
-      box-shadow: var(--shadow-card);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(74, 222, 128, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 40%, #020617 100%);
+      box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
+      color: #e5e7eb;
     }
 
     .hero-panel-header {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 10px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 10px;
     }
 
-    .hero-tag {
+    .hero-tag-main {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+
+    .hero-tag-pill {
       font-size: 11px;
       padding: 3px 10px;
       border-radius: 999px;
       background: rgba(15, 23, 42, 0.9);
-      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, 0.7);
     }
 
-    .hero-panel-grid {
+    .hero-panel-main {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1.1fr 0.9fr;
       gap: 10px;
       margin-bottom: 10px;
     }
 
-    .mini-card {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      padding: 8px 9px;
-      font-size: 11px;
-      border: 1px solid rgba(209, 213, 219, 0.8);
-    }
-
-    .mini-label {
-      color: var(--text-muted);
+    .hero-metric {
+      border-radius: 14px;
+      padding: 10px 11px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.45);
       font-size: 11px;
     }
 
-    .mini-value {
-      font-size: 14px;
+    .hero-metric-label {
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .hero-metric-value {
+      font-size: 18px;
       font-weight: 700;
-      margin-top: 2px;
+      color: #e5e7eb;
     }
 
-    .mini-pill {
-      margin-top: 4px;
+    .hero-metric-foot {
+      margin-top: 3px;
+      font-size: 10px;
+      color: #9ca3af;
+    }
+
+    .hero-metric-subgrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .badge {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
       font-size: 10px;
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      padding: 2px 7px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.04);
+      margin-top: 3px;
     }
 
-    .hero-panel-footer {
-      font-size: 10px;
-      color: var(--text-muted);
-      border-top: 1px dashed rgba(148, 163, 184, 0.7);
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #4ade80;
+    }
+
+    .hero-panel-foot {
+      border-top: 1px dashed rgba(148, 163, 184, 0.6);
       padding-top: 6px;
+      font-size: 10px;
+      color: #9ca3af;
       display: flex;
       justify-content: space-between;
-      gap: 8px;
+      gap: 10px;
     }
 
     .orbital {
       position: absolute;
-      inset: auto -22px -26px auto;
+      inset: auto -26px -32px auto;
       width: 140px;
       height: 140px;
-      opacity: 0.2;
+      opacity: 0.28;
       pointer-events: none;
-      animation: float 10s linear infinite;
+      animation: float 11s linear infinite;
     }
 
     @keyframes float {
       0% { transform: translate3d(0,0,0); }
-      50% { transform: translate3d(-6px,-4px,0); }
+      50% { transform: translate3d(-8px,-6px,0); }
       100% { transform: translate3d(0,0,0); }
     }
 
     /* Sections 共通 */
 
     section.section {
-      padding: 50px 20px;
+      padding: 54px 20px;
+      background: #f9fafb;
     }
 
-    section.section.alt {
-      background: var(--bg-alt);
+    section.section.dark {
+      background: radial-gradient(circle at 0% 0%, #0b1120, #020617 60%);
+      color: #e5e7eb;
     }
 
     .section-head {
-      max-width: 1080px;
-      margin: 0 auto 28px;
+      max-width: 1120px;
+      margin: 0 auto 26px;
       padding: 0 20px;
     }
 
@@ -462,7 +533,55 @@
     .section-sub {
       font-size: 13px;
       color: var(--text-muted);
-      max-width: 640px;
+      max-width: 560px;
+    }
+
+    .section.dark .section-kicker {
+      color: #9ca3af;
+    }
+
+    .section.dark .section-title {
+      color: #e5e7eb;
+    }
+
+    .section.dark .section-sub {
+      color: #9ca3af;
+    }
+
+    /* About grid */
+
+    .about-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 22px;
+    }
+
+    .card-light {
+      border-radius: var(--radius);
+      background: #ffffff;
+      border: 1px solid rgba(203, 213, 225, 0.8);
+      box-shadow: 0 16px 40px rgba(148, 163, 184, 0.22);
+      padding: 18px 18px 16px;
+      font-size: 13px;
+    }
+
+    .card-light h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .list-compact {
+      margin: 6px 0 0;
+      padding-left: 1.1em;
+      font-size: 13px;
+      color: var(--text-main);
+    }
+
+    .list-compact li {
+      margin-bottom: 3px;
     }
 
     .pill-row {
@@ -475,47 +594,16 @@
     .pill {
       padding: 3px 9px;
       border-radius: 999px;
-      border: 1px solid #d1d5db;
+      border: 1px solid rgba(148, 163, 184, 0.6);
       font-size: 11px;
       color: #4b5563;
       background: #f9fafb;
     }
 
-    /* About blocks */
+    /* Focus tiles */
 
-    .about-grid {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-      gap: 24px;
-    }
-
-    .card {
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.96);
-      padding: 18px 18px 16px;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
-      font-size: 14px;
-    }
-
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 16px;
-    }
-
-    .card p {
-      margin: 4px 0;
-      font-size: 13px;
-      color: var(--text);
-    }
-
-    /* Pillars */
-
-    .pillars-grid {
-      max-width: 1080px;
+    .focus-grid {
+      max-width: 1120px;
       margin: 0 auto;
       padding: 0 20px;
       display: grid;
@@ -523,88 +611,66 @@
       gap: 18px;
     }
 
-    .pillar-card {
-      border-radius: var(--radius);
-      background: #050816;
-      color: #e5e7eb;
-      padding: 16px 15px 14px;
+    .focus-card {
       position: relative;
-      overflow: hidden;
+      border-radius: var(--radius);
+      padding: 16px 14px 14px;
+      background: linear-gradient(145deg, #020617, #020617);
+      border: 1px solid rgba(148, 163, 184, 0.45);
       box-shadow: var(--shadow-card);
-      font-size: 13px;
+      overflow: hidden;
+      font-size: 12px;
+      color: #e5e7eb;
       transform: translateY(0);
-      transition: var(--transition);
+      transition: var(--transition-med);
     }
 
-    .pillar-card::before {
+    .focus-card::before {
       content: "";
       position: absolute;
       inset: -40%;
-      background: radial-gradient(circle at top, rgba(154, 217, 86, 0.3), transparent 60%);
+      background: radial-gradient(circle at top, rgba(154, 217, 86, 0.4), transparent 65%);
       opacity: 0;
-      transition: var(--transition);
+      transition: var(--transition-med);
     }
 
-    .pillar-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
+    .focus-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
     }
 
-    .pillar-card:hover::before {
+    .focus-card:hover::before {
       opacity: 1;
     }
 
-    .pillar-tag {
+    .focus-tag {
       font-size: 11px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: #a5b4fc;
       margin-bottom: 6px;
     }
 
-    .pillar-title {
+    .focus-title {
       font-size: 14px;
       font-weight: 600;
       margin-bottom: 6px;
     }
 
-    .pillar-list {
+    .focus-list {
       margin: 6px 0 0;
-      padding-left: 1.2em;
-      color: #d1d5db;
-      font-size: 12px;
+      padding-left: 1.1em;
+      color: #cbd5f5;
     }
 
-    .pillar-list li {
+    .focus-list li {
       margin-bottom: 2px;
     }
 
-    /* Current Initiative */
+    /* Initiative */
 
     .initiative-grid {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 22px;
-    }
-
-    .list-compact {
-      margin: 6px 0 0;
-      padding-left: 1.1em;
-      font-size: 13px;
-      color: var(--text);
-    }
-
-    .list-compact li {
-      margin-bottom: 3px;
-    }
-
-    /* Contact */
-
-    .contact-grid {
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 0 20px;
       display: grid;
@@ -612,13 +678,41 @@
       gap: 20px;
     }
 
-    .contact-box {
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(190, 242, 100, 0.8);
+      font-size: 11px;
+      color: #3f6212;
+    }
+
+    /* Contact */
+
+    .contact-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 20px;
+    }
+
+    .contact-card {
       border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.98);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.85);
       padding: 18px 18px 16px;
-      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
-      font-size: 14px;
+      font-size: 13px;
+      color: #e5e7eb;
     }
 
     .contact-email {
@@ -627,8 +721,8 @@
       gap: 7px;
       padding: 5px 10px;
       border-radius: 999px;
-      border: 1px dashed #cbd2e0;
-      background: #f9fafb;
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.9);
       font-family: ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       font-size: 13px;
       margin-top: 6px;
@@ -636,7 +730,7 @@
 
     .contact-note {
       font-size: 12px;
-      color: var(--text-muted);
+      color: #9ca3af;
       margin-top: 8px;
     }
 
@@ -645,14 +739,14 @@
     footer {
       margin-top: auto;
       border-top: 1px solid rgba(148, 163, 184, 0.4);
-      background: #050816;
+      background: #020617;
       color: #9ca3af;
       font-size: 11px;
       padding: 14px 20px 18px;
     }
 
     .footer-inner {
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -661,17 +755,39 @@
       flex-wrap: wrap;
     }
 
-    /* Animations on scroll */
+    /* Scroll reveal */
 
     .reveal {
       opacity: 0;
-      transform: translateY(10px);
-      transition: 0.3s ease-out;
+      transform: translateY(12px) scale(0.99);
+      transition: 0.4s ease-out;
     }
 
-    .reveal.visible {
+    .reveal.in-view {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-16px);
+      transition: 0.45s ease-out;
+    }
+
+    .reveal-left.in-view {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(16px);
+      transition: 0.45s ease-out;
+    }
+
+    .reveal-right.in-view {
+      opacity: 1;
+      transform: translateX(0);
     }
 
     /* Responsive */
@@ -688,7 +804,7 @@
       .contact-grid {
         grid-template-columns: minmax(0, 1fr);
       }
-      .pillars-grid {
+      .focus-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -702,16 +818,16 @@
         flex-direction: column;
       }
       .hero {
-        padding-top: 40px;
+        padding-top: 42px;
       }
       .hero-title {
         font-size: 26px;
       }
-      .hero-bullets {
+      .focus-grid {
         grid-template-columns: minmax(0, 1fr);
       }
-      .pillars-grid {
-        grid-template-columns: minmax(0, 1fr);
+      section.section {
+        padding: 46px 20px;
       }
     }
 
@@ -724,22 +840,26 @@
 </head>
 <body>
 <div class="page">
+  <div class="scroll-bar" id="scroll-bar"></div>
+
   <!-- Header -->
   <header>
     <div class="header-inner">
       <div class="brand">
-        <!-- ロゴ画像に差し替える場合は、この div を <img> に -->
-        <div class="brand-mark">CN</div>
+        <!-- ロゴ画像に差し替える場合：brand-mark 内部を <img> に -->
+        <div class="brand-mark">
+          <div class="brand-mark-inner">CN</div>
+        </div>
         <div>
           <div class="brand-text-main">Care Nexus</div>
-          <div class="brand-text-sub">医療とデータの接点をつくる</div>
+          <div class="brand-text-sub">医療とデータの接点をつくる学生チーム</div>
         </div>
       </div>
       <nav>
-        <a href="#about">Care Nexus とは</a>
-        <a href="#pillars">フォーカス領域</a>
+        <a href="#about">About</a>
+        <a href="#focus">Focus</a>
         <a href="#initiative">Current Initiative</a>
-        <a href="#contact">お問い合わせ</a>
+        <a href="#contact">Contact</a>
         <button class="nav-cta" onclick="scrollToId('contact')">
           協力・連携のご相談
           <span class="icon">↗</span>
@@ -753,12 +873,12 @@
     </div>
     <div class="nav-mobile" id="nav-mobile">
       <div class="nav-mobile-inner">
-        <a href="#about" onclick="closeMobileNav()">Care Nexus とは</a>
-        <a href="#pillars" onclick="closeMobileNav()">フォーカス領域</a>
+        <a href="#about" onclick="closeMobileNav()">About</a>
+        <a href="#focus" onclick="closeMobileNav()">Focus</a>
         <a href="#initiative" onclick="closeMobileNav()">Current Initiative</a>
-        <a href="#contact" onclick="closeMobileNav()">お問い合わせ</a>
+        <a href="#contact" onclick="closeMobileNav()">Contact</a>
         <a href="#contact" class="nav-mobile-cta" onclick="closeMobileNav()">
-          <span>協力・連携のご相談</span>
+          協力・連携のご相談
           <span>↗</span>
         </a>
       </div>
@@ -768,90 +888,91 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-inner">
-      <div class="reveal">
-        <div class="hero-eyebrow">STUDENT-LED HEALTHCARE PROJECT</div>
+      <div class="reveal-left">
+        <div class="hero-eyebrow">HEALTHCARE × DATA</div>
         <h1 class="hero-title">
-          データとAIで、<span class="highlight">医療をより持続可能に</span>。
+          在宅医療を、<span class="highlight">もっと“見える”ものに。</span>
         </h1>
         <p class="hero-lead">
-          Care Nexus は、医療・看護の現場とデータ・AIをつなぐことで、  
-          現場の感覚に根ざしながらも、無理なく続けられる医療の形を探っているチームです。
+          Care Nexus は、医療・看護の現場とデータ・AIをつなぎ、  
+          「勘と経験」だけに頼らない、持続可能なケアの形を探るチームです。
         </p>
-        <div class="hero-bullets">
-          <div class="hero-bullet">
-            <span class="dot"></span>
-            在宅医療・訪問看護を起点に、現場の構造的な課題を整理
-          </div>
-          <div class="hero-bullet">
-            <span class="dot"></span>
-            データとAIを「日々の運用」に落とし込める形で検討
-          </div>
-          <div class="hero-bullet">
-            <span class="dot"></span>
-            小さな実証から始め、机上の空論にしない
-          </div>
-          <div class="hero-bullet">
-            <span class="dot"></span>
-            プロダクト単体ではなく、医療の情報基盤として育てる
-          </div>
+        <div class="hero-tags">
+          <span class="tag">在宅医療・訪問看護</span>
+          <span class="tag">データ基盤</span>
+          <span class="tag">AI記録支援</span>
+          <span class="tag">学生発プロジェクト</span>
         </div>
         <div class="hero-actions">
           <button class="btn-primary" onclick="scrollToId('about')">
-            Care Nexus について
+            Care Nexus とは
             <span class="icon">↓</span>
           </button>
-          <button class="btn-secondary" onclick="scrollToId('initiative')">
-            現在の取り組みを見る
+          <button class="btn-ghost" onclick="scrollToId('initiative')">
+            現在のプロジェクト
             <span class="icon">→</span>
           </button>
         </div>
         <div class="hero-note">
-          ※ 現在は学生有志によるプロジェクト段階です。法人化は今後検討予定です。
+          ※ 現在は学生有志での検討フェーズです。正式なサービス提供前のコンセプト段階となります。
         </div>
       </div>
-      <div class="hero-panel reveal">
+
+      <div class="hero-panel reveal-right">
         <div class="hero-panel-header">
-          <span>Care Nexus の関心領域</span>
-          <span class="hero-tag">Healthcare × Data</span>
+          <div>
+            <div class="hero-tag-main">CARE NEXUS SNAPSHOT</div>
+          </div>
+          <div class="hero-tag-pill">Early Stage Project</div>
         </div>
-        <div class="hero-panel-grid">
-          <div class="mini-card">
-            <div class="mini-label">主なフィールド</div>
-            <div class="mini-value">在宅医療・訪問看護</div>
-            <div class="mini-pill">地域のケアを支える現場</div>
+        <div class="hero-panel-main">
+          <div class="hero-metric">
+            <div class="hero-metric-label">今、特に見ているテーマ</div>
+            <div class="hero-metric-value">在宅 × 情報の断片化</div>
+            <div class="hero-metric-foot">
+              在宅高齢者の「日常」と、訪問の「瞬間」をどうつなぐか。
+            </div>
           </div>
-          <div class="mini-card">
-            <div class="mini-label">テーマ</div>
-            <div class="mini-value">情報の流れの再設計</div>
-            <div class="mini-pill">断片化 → 連続性へ</div>
-          </div>
-          <div class="mini-card">
-            <div class="mini-label">アプローチ</div>
-            <div class="mini-value">小さく試す</div>
-            <div class="mini-pill">ヒアリング / プロトタイプ</div>
-          </div>
-          <div class="mini-card">
-            <div class="mini-label">技術</div>
-            <div class="mini-value">AI / データ連携</div>
-            <div class="mini-pill">実現可能な範囲から</div>
+          <div class="hero-metric-subgrid">
+            <div class="hero-metric">
+              <div class="hero-metric-label">関わる領域</div>
+              <div class="hero-metric-foot">
+                在宅医療<br/>訪問看護<br/>地域包括ケア
+              </div>
+            </div>
+            <div class="hero-metric">
+              <div class="hero-metric-label">技術の使い方</div>
+              <div class="hero-metric-foot">
+                <div class="badge">
+                  <span class="badge-dot"></span>
+                  記録の下ごしらえを AI に
+                </div>
+                <div class="badge" style="margin-top:4px;">
+                  <span class="badge-dot" style="background:#a855f7;"></span>
+                  データは「見える化」から
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="hero-panel-footer">
-          <span>最初の一歩は在宅高齢者 × 訪問看護領域から。</span>
-          <span>詳細は本ページ中部の「Current Initiative」に記載。</span>
+        <div class="hero-panel-foot">
+          <span>まずは在宅高齢者 × 訪問看護ステーションで小さく検証。</span>
+          <span>その先に、地域の医療・ケア全体の情報基盤を見据えています。</span>
         </div>
+
         <svg class="orbital" viewBox="0 0 160 160">
           <defs>
             <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#d9f99d" />
-              <stop offset="100%" stop-color="#4ade80" />
+              <stop offset="0%" stop-color="#bbf7d0" />
+              <stop offset="50%" stop-color="#4ade80" />
+              <stop offset="100%" stop-color="#22c55e" />
             </linearGradient>
           </defs>
           <circle cx="80" cy="80" r="54" fill="none" stroke="url(#grad)" stroke-width="1.4" />
-          <circle cx="80" cy="80" r="34" fill="none" stroke="rgba(15,23,42,0.3)" stroke-width="1" />
-          <circle cx="36" cy="80" r="3" fill="#bbf7d0" />
-          <circle cx="118" cy="56" r="2.4" fill="#4ade80" />
-          <circle cx="120" cy="105" r="2" fill="#bef264" />
+          <circle cx="80" cy="80" r="36" fill="none" stroke="rgba(148,163,184,0.5)" stroke-width="1" />
+          <circle cx="34" cy="80" r="3" fill="#bbf7d0" />
+          <circle cx="118" cy="52" r="2.4" fill="#4ade80" />
+          <circle cx="120" cy="106" r="2" fill="#a5b4fc" />
         </svg>
       </div>
     </div>
@@ -863,81 +984,74 @@
       <div class="section-kicker">ABOUT</div>
       <h2 class="section-title">Care Nexus とは</h2>
       <p class="section-sub">
-        特定の1つの製品を作るのではなく、医療とデータの接点を長期的に育てていく「場」として存在しています。
+        一つの「サービス」を売るためではなく、医療とデータの関係そのものを丁寧に設計し直すための場です。
       </p>
     </div>
     <div class="about-grid">
-      <div class="card reveal">
-        <h3>向き合っている問い</h3>
-        <p>
-          高齢化の進行とともに、在宅で暮らす方・地域でケアを支える専門職は増えています。一方で、
-        </p>
+      <div class="card-light reveal">
+        <h3>私たちがやりたいこと</h3>
         <ul class="list-compact">
-          <li>生活・医療情報が紙や電話、個別システムに分散してしまう</li>
-          <li>現場の時間が、記録や算定などの事務に多く奪われてしまう</li>
+          <li>在宅・地域のケア現場にある「見えない情報」を可視化する</li>
+          <li>記録・算定などの「手作業」を AI で下支えする</li>
+          <li>現場にとって無理なく続けられる仕組みとして形にする</li>
         </ul>
-        <p>
-          といった構造的な問題が残っています。Care Nexus は、こうした課題を「データの流れ」「業務プロセス」「制度」といった観点から整理し、
-          現場と一緒に無理なく機能する形を探っていきます。
-        </p>
-      </div>
-      <div class="card reveal">
-        <h3>チームの背景</h3>
-        <p>
-          慶應義塾大学看護医療学部の学生を中心に、在宅医療・地域医療に関心を持つメンバーで構成されています。医師・看護師・研究者の方々から助言をいただきながら、
-        </p>
-        <ul class="list-compact">
-          <li>医療的に妥当か</li>
-          <li>現場で運用できるか</li>
-          <li>法制度・情報セキュリティを満たせるか</li>
-        </ul>
-        <p>
-          といった観点を意識しつつ、小さな検証から進めています。
-        </p>
         <div class="pill-row">
-          <span class="pill">在宅医療・訪問看護</span>
-          <span class="pill">医療 × データ / AI</span>
+          <span class="pill">在宅高齢者</span>
+          <span class="pill">訪問看護ステーション</span>
+          <span class="pill">地域包括ケア</span>
+        </div>
+      </div>
+      <div class="card-light reveal">
+        <h3>メンバーとスタンス</h3>
+        <ul class="list-compact">
+          <li>慶應義塾大学 看護医療学部の学生を中心としたチーム</li>
+          <li>医師・看護師・研究者・企業の方からの助言を受けながら検討</li>
+          <li>「現場にとって意味があるか」を常に問い直すスタンス</li>
+        </ul>
+        <div class="pill-row">
           <span class="pill">学生発プロジェクト</span>
+          <span class="pill">医療 × データ / AI</span>
+          <span class="pill">小さく試す / 大きく学ぶ</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Pillars -->
-  <section class="section alt" id="pillars">
+  <!-- Focus -->
+  <section class="section dark" id="focus">
     <div class="section-head">
       <div class="section-kicker">FOCUS</div>
-      <h2 class="section-title">Care Nexus が大事にしている3つの軸</h2>
+      <h2 class="section-title">Care Nexus が重視している3つの視点</h2>
       <p class="section-sub">
-        どのプロジェクトでも、この3軸から外れないように設計しています。
+        どのプロジェクトでも、この3つから外れないように設計します。
       </p>
     </div>
-    <div class="pillars-grid">
-      <div class="pillar-card reveal">
-        <div class="pillar-tag">01 / FIELD</div>
-        <div class="pillar-title">在宅・地域のケアを起点に</div>
-        <ul class="pillar-list">
+    <div class="focus-grid">
+      <div class="focus-card reveal">
+        <div class="focus-tag">01 / FIELD</div>
+        <div class="focus-title">在宅・地域の「現場」起点</div>
+        <ul class="focus-list">
           <li>在宅医療・訪問看護・地域包括ケア</li>
-          <li>「病院の外」にある課題を正面から扱う</li>
-          <li>現場の声を起点に、テーマを設定</li>
+          <li>病院の外にある課題を捉え直す</li>
+          <li>ヒアリングからテーマを抽出</li>
         </ul>
       </div>
-      <div class="pillar-card reveal">
-        <div class="pillar-tag">02 / DATA &amp; AI</div>
-        <div class="pillar-title">データを、現場の言葉に戻す</div>
-        <ul class="pillar-list">
-          <li>バラバラな記録やバイタルを整理・可視化</li>
-          <li>AIは「仕事を奪う」ではなく「下ごしらえ」を担う</li>
+      <div class="focus-card reveal">
+        <div class="focus-tag">02 / DATA &amp; AI</div>
+        <div class="focus-title">データを現場の言葉に戻す</div>
+        <ul class="focus-list">
+          <li>バラバラな記録・バイタルの整理と可視化</li>
+          <li>AIは「判断」ではなく「準備」に使う</li>
           <li>書類ではなくケアに時間を使えるように</li>
         </ul>
       </div>
-      <div class="pillar-card reveal">
-        <div class="pillar-tag">03 / APPROACH</div>
-        <div class="pillar-title">小さく試し、現実に合わせる</div>
-        <ul class="pillar-list">
+      <div class="focus-card reveal">
+        <div class="focus-tag">03 / APPROACH</div>
+        <div class="focus-title">小さく試すプロセス</div>
+        <ul class="focus-list">
           <li>ヒアリング → 仮説 → プロトタイプ → 振り返り</li>
-          <li>「やることを増やさない」設計を優先</li>
-          <li>無理なく続けられる形を一緒に考える</li>
+          <li>「現場の負担を増やさない」設計を優先</li>
+          <li>実際に使えるところまで磨き込む</li>
         </ul>
       </div>
     </div>
@@ -949,68 +1063,72 @@
       <div class="section-kicker">CURRENT INITIATIVE</div>
       <h2 class="section-title">Project 01：在宅高齢者 × 訪問看護</h2>
       <p class="section-sub">
-        最初の一歩として、在宅高齢者と訪問看護ステーションの「情報の断片化」と「記録・算定業務の負担」に焦点を当てたプロジェクトを進めています。
+        最初の一歩として、在宅高齢者と訪問看護ステーションの「情報の断片化」と「記録・算定業務の負担」に向き合うプロジェクトを進めています。
       </p>
     </div>
     <div class="initiative-grid">
-      <div class="card reveal">
-        <h3>どんな課題に向き合っているか</h3>
+      <div class="card-light reveal">
+        <h3>向き合っている課題</h3>
         <ul class="list-compact">
-          <li>在宅患者さんの情報が、紙・電話・個別システムに分かれてしまう</li>
-          <li>訪問のたびに「その場限りの情報」として扱われがち</li>
+          <li>在宅患者の情報が紙・電話・個別システムに分散している</li>
+          <li>訪問ごとに「その場限りの情報」になりやすい</li>
           <li>訪問看護師の記録・診療報酬算定の負担が大きい</li>
         </ul>
-        <p>
-          このプロジェクトでは、既存のバイタルデバイスや記録システムと連携しながら、
-          在宅患者情報の整理と、記録・算定業務の一部をAIで補助することを検討しています。
+        <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">
+          これらを、「既存デバイス・既存システムとの連携」と「AI による記録支援」でどこまで軽くできるかを検証していきます。
         </p>
+        <div class="chip-row">
+          <span class="chip">在宅患者データの集約</span>
+          <span class="chip">AIによる記録案生成</span>
+          <span class="chip">加算算定のチェック支援</span>
+        </div>
       </div>
-      <div class="card reveal">
-        <h3>現時点の構想（ラフスケッチ）</h3>
+      <div class="card-light reveal">
+        <h3>現時点の進め方（イメージ）</h3>
         <ul class="list-compact">
-          <li>既存プロダクトからのデータをクラウド上で集約・時系列表示</li>
-          <li>訪問時のメモから、AIが SOAP 記録案や家族向け説明文のたたきを生成</li>
-          <li>どの加算が算定可能か、必要項目がそろっているかをチェック</li>
+          <li>訪問看護ステーション・在宅医療の現場へのヒアリング</li>
+          <li>紙・既存システムでの情報フローの可視化</li>
+          <li>小さなプロトタイプでの試行とフィードバック</li>
         </ul>
-        <p>
-          具体的な機能範囲や、法制度・情報セキュリティの要件については、  
-          現場の方や専門家の方と議論しながら慎重に絞り込んでいく予定です。
+        <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">
+          法制度・情報セキュリティ・診療報酬の要件は、専門家の方と相談しながら慎重に設計していきます。
         </p>
       </div>
     </div>
   </section>
 
   <!-- Contact -->
-  <section class="section alt" id="contact">
+  <section class="section dark" id="contact">
     <div class="section-head">
       <div class="section-kicker">CONTACT</div>
       <h2 class="section-title">協力・連携のご相談</h2>
       <p class="section-sub">
-        実際の現場でのニーズや、技術・制度面での論点を教えていただける方との対話を歓迎しています。
+        現場のリアルな声、制度・技術の観点からのコメントをいただける方との対話を歓迎しています。
       </p>
     </div>
     <div class="contact-grid">
-      <div class="contact-box reveal">
-        <p>
-          例えば、次のような形で関わっていただけると大変ありがたいです。
-        </p>
-        <ul class="list-compact">
-          <li>在宅医療・訪問看護の現状や課題に関するヒアリング</li>
-          <li>ごく小さな範囲でのプロトタイプ試験導入</li>
-          <li>医療情報・個人情報保護・診療報酬に関する専門的な助言</li>
+      <div class="contact-card reveal-left">
+        <h3 style="margin:0 0 6px;font-size:15px;">こんな方とお話ししたいです</h3>
+        <ul class="focus-list">
+          <li>在宅医療・訪問看護の現場で働いている方</li>
+          <li>医療情報・個人情報保護・診療報酬に詳しい方</li>
+          <li>医療・ヘルスケア領域での IT / データ活用に関心のある企業・エンジニアの方</li>
         </ul>
         <p class="contact-note">
-          内容が固まっていなくても構いません。「一度話をしてみたい」くらいのお気持ちでも、お気軽にご連絡ください。
+          「まだアイデア段階だけど」「少しだけ意見を伝えたい」くらいの温度感でも構いません。
         </p>
       </div>
-      <div class="contact-box reveal">
-        <p>ご連絡は、以下のメールアドレス宛にお願いいたします。</p>
+      <div class="contact-card reveal-right">
+        <h3 style="margin:0 0 6px;font-size:15px;">ご連絡先</h3>
+        <p style="font-size:13px;margin:4px 0;">
+          下記メールアドレス宛に、「Care Nexus について」と件名を添えてご連絡ください。
+        </p>
         <div class="contact-email">
           <span>✉</span>
           <span>example@keio.jp</span>
         </div>
         <p class="contact-note">
-          ※ 実際に利用する代表メールアドレスに差し替えてください。必要に応じてフォームやSNSへのリンクも追加できます。
+          ※ 実際に使用する代表メールアドレスに差し替えてください。必要に応じてフォームや SNS へのリンクも追加可能です。
         </p>
       </div>
     </div>
@@ -1057,13 +1175,22 @@
     if (toggles[0]) toggles[0].classList.remove("nav-open");
   }
 
+  // スクロールバー
+  const scrollBar = document.getElementById("scroll-bar");
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) : 0;
+    scrollBar.style.width = (progress * 100) + "%";
+  });
+
   // スクロール時のフェードイン
-  const revealEls = document.querySelectorAll(".reveal");
+  const reveals = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
+          entry.target.classList.add("in-view");
           io.unobserve(entry.target);
         }
       });
@@ -1072,8 +1199,7 @@
       threshold: 0.18
     }
   );
-
-  revealEls.forEach((el) => io.observe(el));
+  reveals.forEach((el) => io.observe(el));
 </script>
 </body>
 </html>
